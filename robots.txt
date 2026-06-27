@@ -1,0 +1,30 @@
+# robots.txt — thaiholidaybudget.com
+# Allow all reputable crawlers to index everything public.
+
+User-agent: *
+Allow: /
+
+# Avoid indexing duplicate URL variations created by query strings (if any are ever added)
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*ref=
+
+# Google (explicitly allow full access — do NOT block CSS/JS/images so the page renders)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# AI/search assistant crawlers — allowed (helps citations & AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# XML sitemap
+Sitemap: https://thaiholidaybudget.com/sitemap.xml
