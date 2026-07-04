@@ -1723,4 +1723,19 @@ function toggleTheme(){
 }
 
 //=================== INIT ===================
-document.addEventListener('input', e=>{ if(e.target.clos
+document.addEventListener('input', e=>{ if(e.target.closest('main')) recalc(); });
+$('insDays').addEventListener('input',()=>{$('insDays').dataset.touched='1';});
+window.addEventListener('DOMContentLoaded',()=>{
+  loadProgress();
+  cur = 0;
+  markSel('areaGrid',sel.area); markSel('tierGrid',sel.tier); markSel('foodGrid',sel.food);
+  markSel('airportGrid',sel.airport); markSel('dailyTransGrid',sel.daily); markSel('shopGrid',sel.shop); markSel('sceneGrid',sel.scene);
+  document.querySelectorAll('.ins-toggle').forEach(x=>x.classList.toggle('sel', +x.dataset.ins===sel.ins));
+  $('insBox').style.display = sel.ins?'block':'none';
+  renderStep(); recalc();
+  let ok; try{ok=localStorage.getItem('somchai_cookie_ok');}catch(e){}
+  if(!ok) setTimeout(()=>$('cookieBanner').classList.remove('hidden'),900);
+});
+</script>
+</body>
+</html>
