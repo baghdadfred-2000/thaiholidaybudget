@@ -1,1 +1,2 @@
-google.com, pub-2738929737632064, DIRECT, f08c47fec0942fa0
+# ads.txt - previous advertiser's authorized-seller line removed.
+# Add your new advertiser's ads.txt entry here when available.
