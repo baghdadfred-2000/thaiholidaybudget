@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Uncle Pong's Thailand Holiday Estimator",
+  "url": "https://thaiholidaybudget.com/contact.html",
+  "isPartOf": { "@type": "WebSite", "name": "Uncle Pong's Thailand Holiday Estimator", "url": "https://thaiholidaybudget.com/" },
+  "about": { "@type": "Organization", "name": "Genext Information Systems", "email": "support@thaiholidaybudget.com", "url": "https://thaiholidaybudget.com/" },
+  "inLanguage": "en"
+}

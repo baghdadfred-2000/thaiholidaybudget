@@ -1,0 +1,60 @@
+# robots.txt — thaiholidaybudget.com
+# Canonical host: https://thaiholidaybudget.com  (non-www; www 301-redirects here)
+# Policy: fully open to search + AI-answer crawlers. Last reviewed 2026-07-06.
+
+# ---------------------------------------------------------------------------
+# Default group — applies to Googlebot, Bingbot and every other crawler that
+# is NOT named separately below. Do NOT block CSS / JS / images / fonts:
+# Google must fetch them to render the client-side estimator, charts and
+# phrasebook. Blocking assets would break rendering and de-rank the page.
+# ---------------------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# Crawl hygiene — keep tracking / faceting query-string variants out of the
+# index if any are ever introduced later (prevents duplicate-URL bloat).
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*ref=
+Disallow: /*?*utm_
+
+# Rollback copy of the homepage must never be indexed (near-duplicate risk).
+# The authoritative control is a noindex tag on the file itself; this line is
+# belt-and-braces and only applies to crawlers that read the * group.
+Disallow: /index-v1-backup.html
+
+# ---------------------------------------------------------------------------
+# Explicit welcome for AI-answer / retrieval crawlers. Listed so the intent
+# is unambiguous: these may crawl and cite the site in Google AI Overviews,
+# ChatGPT, Perplexity and Claude answers. (A named group REPLACES the * group
+# for that agent, so no Disallow lines are repeated here — these bots are
+# intentionally granted full, unrestricted access.)
+# ---------------------------------------------------------------------------
+User-agent: Google-Extended
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ---------------------------------------------------------------------------
+# XML sitemap — absolute URL on the canonical (non-www) host.
+# ---------------------------------------------------------------------------
+Sitemap: https://thaiholidaybudget.com/sitemap.xml

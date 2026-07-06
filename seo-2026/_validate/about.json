@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Uncle Pong's Thailand Holiday Estimator",
+  "url": "https://thaiholidaybudget.com/about.html",
+  "description": "About Uncle Pong's Thailand holiday budget estimator, a free and private trip cost calculator.",
+  "isPartOf": { "@type": "WebSite", "name": "Uncle Pong's Thailand Holiday Estimator", "url": "https://thaiholidaybudget.com/" },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Genext Information Systems",
+    "url": "https://thaiholidaybudget.com/",
+    "logo": "https://thaiholidaybudget.com/unclePong.jpg",
+    "email": "support@thaiholidaybudget.com"
+  },
+  "inLanguage": "en"
+}

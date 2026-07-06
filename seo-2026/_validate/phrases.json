@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://thaiholidaybudget.com/phrases.html#article",
+      "headline": "50 Handy Thai Phrases for Travelers",
+      "description": "50 practical Thai phrases for your Thailand holiday: greetings, market haggling, ordering food, nightlife and emergencies. Searchable, categorized and tap-to-copy.",
+      "url": "https://thaiholidaybudget.com/phrases.html",
+      "image": "https://thaiholidaybudget.com/unclePong.jpg",
+      "author": { "@type": "Organization", "name": "Genext Information Systems", "url": "https://thaiholidaybudget.com/" },
+      "publisher": { "@type": "Organization", "name": "Genext Information Systems", "logo": { "@type": "ImageObject", "url": "https://thaiholidaybudget.com/unclePong.jpg" } },
+      "datePublished": "2026-06-28",
+      "dateModified": "2026-07-06",
+      "inLanguage": "en",
+      "isPartOf": { "@type": "WebSite", "name": "Uncle Pong's Thailand Holiday Estimator", "url": "https://thaiholidaybudget.com/" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Thai phrasebook categories",
+      "description": "The 50 travel phrases are grouped into five practical categories.",
+      "numberOfItems": 5,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Greetings and politeness" },
+        { "@type": "ListItem", "position": 2, "name": "Haggling and shopping" },
+        { "@type": "ListItem", "position": 3, "name": "Food and ordering" },
+        { "@type": "ListItem", "position": 4, "name": "Nightlife and going out" },
+        { "@type": "ListItem", "position": 5, "name": "Emergencies and help" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thaiholidaybudget.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Thai Phrases", "item": "https://thaiholidaybudget.com/phrases.html" }
+      ]
+    }
+  ]
+}
