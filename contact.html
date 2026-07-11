@@ -283,4 +283,15 @@ tailwind.config = {
       }).then(function(r){ return r.json(); }).then(function(data){
         if(!data.success) throw new Error(data.message||'send failed');
         form.reset();
-        ok.classLis
+        ok.classList.remove('hidden');
+      }).catch(function(){
+        err.textContent='Something went wrong sending your message. Please email us directly at support@thaiholidaybudget.com.';
+        err.classList.remove('hidden');
+      }).finally(function(){
+        btn.disabled=false; btn.textContent=label;
+      });
+    });
+  })();
+</script>
+</body>
+</html>
