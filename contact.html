@@ -124,9 +124,11 @@ tailwind.config = {
     <h2>Send us a message</h2>
     <p>Choose a topic and send us your message. We reply to the email address you provide, usually within 24 hours.</p>
 
-    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="mt-3">
-      <input type="hidden" name="form-name" value="contact" />
-      <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+    <form id="contactForm" name="contact" method="POST" action="https://api.web3forms.com/submit" class="mt-3">
+      <input type="hidden" name="access_key" value="c394c121-5e53-49ec-be2b-3fdb67c9a3a3" />
+      <input type="hidden" name="subject" value="New contact message — thaiholidaybudget.com" />
+      <input type="hidden" name="from_name" value="ThaiHolidayBudget Contact Form" />
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
       <div class="grid sm:grid-cols-2 sm:gap-x-4">
         <div>
@@ -274,22 +276,11 @@ tailwind.config = {
       }
       var btn=form.querySelector('button[type=submit]');
       var label=btn.textContent; btn.disabled=true; btn.textContent='Sending…';
-      fetch('/',{
+      fetch('https://api.web3forms.com/submit',{
         method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:new URLSearchParams(new FormData(form)).toString()
-      }).then(function(r){
-        if(!r.ok) throw new Error('bad status');
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(Object.fromEntries(new FormData(form)))
+      }).then(function(r){ return r.json(); }).then(function(data){
+        if(!data.success) throw new Error(data.message||'send failed');
         form.reset();
-        ok.classList.remove('hidden');
-      }).catch(function(){
-        err.textContent='Something went wrong sending your message. Please email us directly at support@thaiholidaybudget.com.';
-        err.classList.remove('hidden');
-      }).finally(function(){
-        btn.disabled=false; btn.textContent=label;
-      });
-    });
-  })();
-</script>
-</body>
-</html>
+        ok.classLis
