@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lost in Thailand? — 404 · Uncle Pong's Thailand Holiday Estimator</title>
+<meta name="description" content="This page took a wrong turn down a soi. Page not found (404) on thaiholidaybudget.com — Uncle Pong will point you back the right way.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0F766E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-900:#134e4a;
+    --teal-700:#0F766E;
+    --teal-600:#0d9488;
+    --teal-500:#14b8a6;
+    --teal-50:#f0fdfa;
+    --amber:#f59e0b;
+    --amber-soft:#fcd34d;
+    --sand:#fff7ed;
+    --ink:#0f2e2c;
+    --muted:#5b7c78;
+    --white:#ffffff;
+    --ring:rgba(15,118,110,.18);
+    --shadow:0 20px 45px -20px rgba(15,78,74,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 600px at 80% -10%, #ccfbf1 0%, rgba(204,251,241,0) 55%),
+      radial-gradient(900px 500px at -10% 20%, #fef3c7 0%, rgba(254,243,199,0) 50%),
+      linear-gradient(180deg,#f0fdfa 0%, #ffffff 40%, #f7fdfb 100%);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1120px,92vw);margin-inline:auto}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter:saturate(160%) blur(10px);
+    background:rgba(255,255,255,.82);
+    border-bottom:1px solid rgba(15,118,110,.12);
+  }
+  .nav{display:flex;align-items:center;gap:18px;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--teal-900);font-size:18px}
+  .brand img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-500);box-shadow:0 4px 10px -4px var(--ring)}
+  .nav-links{display:flex;align-items:center;gap:6px;margin-left:auto}
+  .nav-links a{
+    padding:9px 14px;border-radius:999px;font-weight:600;font-size:14.5px;color:var(--teal-900);
+    transition:background .18s,color .18s;
+  }
+  .nav-links a:hover{background:var(--teal-50);color:var(--teal-700)}
+  .nav-cta{
+    background:var(--teal-700)!important;color:#fff!important;
+    box-shadow:0 10px 20px -10px rgba(15,118,110,.8);
+  }
+  .nav-cta:hover{background:var(--teal-600)!important}
+  .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--ring);border-radius:10px;padding:8px 10px;font-size:18px;color:var(--teal-700);cursor:pointer}
+
+  /* ---------- Hero / 404 ---------- */
+  main{flex:1;display:flex;align-items:center;padding:56px 0 72px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(245,158,11,.14);color:#b45309;font-weight:700;font-size:13px;
+    padding:7px 14px;border-radius:999px;letter-spacing:.02em;margin-bottom:18px;
+  }
+  .code{
+    font-family:'Baloo 2',sans-serif;font-weight:800;line-height:.9;
+    font-size:clamp(88px,16vw,168px);
+    background:linear-gradient(135deg,var(--teal-700),var(--teal-500) 60%,var(--amber));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    letter-spacing:-.02em;margin-bottom:8px;
+  }
+  h1{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);color:var(--teal-900);line-height:1.15;margin-bottom:16px}
+  .lede{font-size:17px;color:var(--muted);max-width:52ch;line-height:1.6}
+  .lede strong{color:var(--teal-700)}
+  .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15.5px;
+    padding:14px 24px;border-radius:14px;transition:transform .15s,box-shadow .15s,background .18s;
+  }
+  .btn-primary{background:var(--teal-700);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{background:var(--teal-600);transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--teal-800,#115e59);border:1.5px solid var(--ring)}
+  .btn-ghost:hover{background:var(--teal-50);transform:translateY(-2px)}
+
+  .checklist{margin-top:26px;font-size:14.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:14px 22px}
+  .checklist span{display:inline-flex;align-items:center;gap:7px}
+  .checklist b{color:var(--teal-700)}
+
+  /* Uncle Pong card */
+  .pong{
+    position:relative;justify-self:center;max-width:380px;width:100%;
+    background:linear-gradient(180deg,#ffffff,#f0fdfa);
+    border:1px solid rgba(15,118,110,.14);border-radius:26px;padding:26px;
+    box-shadow:var(--shadow);text-align:center;
+  }
+  .pong img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 12px 30px -12px rgba(15,78,74,.6);margin-bottom:14px}
+  .pong .quote{font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--teal-900);font-size:19px;line-height:1.35;margin-bottom:8px}
+  .pong .by{font-size:13.5px;color:var(--muted)}
+  .pong .badge{
+    position:absolute;top:-14px;right:-8px;background:var(--amber);color:#4a2b00;
+    font-weight:800;font-size:13px;padding:8px 14px;border-radius:999px;transform:rotate(6deg);
+    box-shadow:0 8px 18px -8px rgba(245,158,11,.9);
+  }
+  .palm{position:absolute;bottom:-10px;left:-8px;font-size:34px;filter:drop-shadow(0 6px 6px rgba(0,0,0,.12))}
+
+  /* helpful links strip */
+  .quicklinks{margin-top:60px}
+  .quicklinks h2{font-family:'Baloo 2',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;margin-bottom:18px}
+  .qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .qcard{
+    background:#fff;border:1px solid rgba(15,118,110,.12);border-radius:16px;padding:18px;
+    transition:transform .15s,box-shadow .15s,border-color .18s;
+  }
+  .qcard:hover{transform:translateY(-3px);box-shadow:0 16px 30px -20px rgba(15,78,74,.5);border-color:var(--teal-500)}
+  .qcard .ic{font-size:24px}
+  .qcard .t{font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--teal-900);margin:8px 0 4px;font-size:16px}
+  .qcard .d{font-size:13.5px;color:var(--muted);line-height:1.45}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--teal-900);color:#cdeee9;padding:40px 0 30px}
+  .foot-top{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .foot-top img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-500)}
+  .foot-top .name{font-family:'Baloo 2',sans-serif;font-weight:800;color:#fff;font-size:16px}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:8px 22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .foot-nav a{font-size:14px;color:#a7d9d2;font-weight:500;transition:color .15s}
+  .foot-nav a:hover{color:#fff}
+  .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:20px;font-size:12.5px;color:#7fbfb7}
+  .foot-bottom a{color:#a7d9d2}
+  .foot-bottom a:hover{color:#fff}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;gap:36px;text-align:center}
+    .lede{margin-inline:auto}
+    .actions,.checklist{justify-content:center}
+    .pong{order:-1}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .qgrid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:480px){
+    .qgrid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav">
+    <a class="brand" href="https://thaiholidaybudget.com/#top">
+      <img src="https://thaiholidaybudget.com/unclePong.jpg" alt="Uncle Pong">
+      <span>Uncle Pong's Thailand Holiday Estimator</span>
+    </a>
+    <div class="nav-links">
+      <a href="https://thaiholidaybudget.com/#how">How it works</a>
+      <a href="https://thaiholidaybudget.com/#smarter">Travel smarter</a>
+      <a href="https://thaiholidaybudget.com/phrases">Thai phrases</a>
+      <a class="nav-cta" href="https://thaiholidaybudget.com/">Build my Budget</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">☰</button>
+  </nav>
+  <div id="m" class="wrap" style="display:none"></div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">🌴 Error 404 · You wandered off the map</span>
+        <div class="code">404</div>
+        <h1>Khun farang… this page took a wrong turn down a soi.</h1>
+        <p class="lede">
+          I'm <strong>Uncle Pong</strong>, and I've walked every beach road from Pattaya to Phuket — but
+          this page? Not on my map. Maybe the link had a typo, or it packed up and flew home early.
+          No stress. Let's get you back to planning a trip with <strong>no surprises</strong>.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://thaiholidaybudget.com/">🧮 Build my Budget →</a>
+          <a class="btn btn-ghost" href="https://thaiholidaybudget.com/#top">← Back to home</a>
+        </div>
+        <div class="checklist">
+          <span>✓ <b>100% free</b></span>
+          <span>✓ Runs in your browser</span>
+          <span>✓ No sign-up</span>
+          <span>✓ Your data stays on your device</span>
+        </div>
+      </div>
+
+      <div class="pong">
+        <span class="badge">Lost? 🧭</span>
+        <img src="https://thaiholidaybudget.com/unclePong.jpg" alt="Uncle Pong — your cheeky Thai uncle and host">
+        <p class="quote">"Every trip has a wrong turn.<br>Plan the baht, then enjoy every one of them."</p>
+        <p class="by">Uncle Pong · seen it all since the '80s</p>
+        <span class="palm">🌴</span>
+      </div>
+    </div>
+
+    <section class="quicklinks">
+      <h2>Or hop on the baht bus to somewhere useful</h2>
+      <div class="qgrid">
+        <a class="qcard" href="https://thaiholidaybudget.com/">
+          <div class="ic">🧮</div>
+          <div class="t">Budget Builder</div>
+          <div class="d">Get a real number for your whole trip — down to the last beach beer.</div>
+        </a>
+        <a class="qcard" href="https://thaiholidaybudget.com/#how">
+          <div class="ic">🧭</div>
+          <div class="t">How it works</div>
+          <div class="d">Pick your Thailand, set your style, watch the total build live.</div>
+        </a>
+        <a class="qcard" href="https://thaiholidaybudget.com/#smarter">
+          <div class="ic">💡</div>
+          <div class="t">Travel smarter</div>
+          <div class="d">Uncle Pong's field notes on cash, entry rules and staying safe.</div>
+        </a>
+        <a class="qcard" href="https://thaiholidaybudget.com/phrases">
+          <div class="ic">🇹🇭</div>
+          <div class="t">Thai phrases</div>
+          <div class="d">50 handy phrases — greetings, haggling, ordering, tap to copy.</div>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <img src="https://thaiholidaybudget.com/unclePong.jpg" alt="Uncle Pong">
+      <span class="name">Uncle Pong's Thailand Holiday Estimator</span>
+    </div>
+    <nav class="foot-nav">
+      <a href="https://thaiholidaybudget.com/about">About</a>
+      <a href="https://thaiholidaybudget.com/contact">Contact</a>
+      <a href="https://thaiholidaybudget.com/phrases">Thai Phrases</a>
+      <a href="https://thaiholidaybudget.com/privacy">Privacy</a>
+      <a href="https://thaiholidaybudget.com/cookies">Cookie Policy</a>
+      <a href="https://thaiholidaybudget.com/cookie-settings">Cookie Settings</a>
+      <a href="https://thaiholidaybudget.com/terms">Terms &amp; Disclaimer</a>
+      <a href="https://thaiholidaybudget.com/accessibility">Accessibility</a>
+    </nav>
+    <div class="foot-bottom">
+      <span>© 2026 Genext Information Systems. All rights reserved. · <a href="https://thaiholidaybudget.com">thaiholidaybudget.com</a> · V2.0</span>
+      <span>For entertainment purposes only. Not affiliated with the Thai Ministry of Tourism. 🌴</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
