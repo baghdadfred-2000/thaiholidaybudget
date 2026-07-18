@@ -1,0 +1,13 @@
+# Canonicalize every page to ONE URL form: clean, extensionless.
+# The trailing "!" forces the redirect even though the .html file exists (Netlify).
+# On Cloudflare Pages the .html -> clean redirect is automatic; this file is harmless there.
+
+/index.html            /                 301!
+/about.html            /about            301!
+/contact.html          /contact          301!
+/privacy.html          /privacy          301!
+/cookies.html          /cookies          301!
+/cookie-settings.html  /cookie-settings  301!
+/terms.html            /terms            301!
+/accessibility.html    /accessibility    301!
+/phrases.html          /phrases          301!
