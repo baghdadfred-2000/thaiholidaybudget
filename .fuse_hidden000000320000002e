@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<style class="xad-off">.xadr,.ad-rail,.side-rail,.rail-ad,.wz-rail{display:none!important}</style>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="UTF-8" />
+<script>/* theme bootstrap: dark is the default; light only if explicitly chosen */
+(function(){try{if(localStorage.getItem('pong_theme')!=='light')document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thailand Trip Cost Calculator 2026 — Uncle Pong's Budget Estimator</title>
+<meta name="description" content="Free Thailand trip cost calculator. Budget flights, hotels, food, transport, insurance & nights out for Pattaya, Bangkok, Phuket, Chiang Mai & more — in your own currency. No surprises." />
+<link rel="canonical" href="https://thaiholidaybudget.com/" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="author" content="Genext Information Systems" />
+<meta name="theme-color" content="#0F766E" />
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Uncle Pong's Thailand Holiday Estimator" />
+<meta property="og:title" content="Thailand Trip Cost Calculator 2026 — Uncle Pong's Budget Estimator" />
+<meta property="og:description" content="Free Thailand trip cost calculator. Budget flights, hotels, food, transport, insurance & nights out — in your own currency. No surprises." />
+<meta property="og:url" content="https://thaiholidaybudget.com/" />
+<meta property="og:image" content="https://thaiholidaybudget.com/unclePong.jpg" />
+<meta property="og:locale" content="en_US" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Thailand Trip Cost Calculator 2026 — Uncle Pong's Budget Estimator" />
+<meta name="twitter:description" content="Free Thailand trip cost calculator. Budget flights, hotels, food, transport, insurance & nights out — in your own currency." />
+<meta name="twitter:image" content="https://thaiholidaybudget.com/unclePong.jpg" />
+
+<!-- Chart.js for the cost-breakdown doughnut -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- Fonts: Inter (body) + Fraunces (display headlines) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet">
+
+<!-- Tailwind Play CDN + brand palette -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        tealdeep: '#0F766E',   /* primary deep teal   */
+        aqua:     '#14B8A6',   /* vibrant teal        */
+        coral:    '#F97316',   /* warm sunset coral   */
+        ambery:   '#FBBF24',   /* golden amber        */
+        sand:     '#F5F0E6',   /* warm sand           */
+        cream:    '#FFFBF0',   /* cream               */
+        ink:      'rgb(var(--ink-rgb) / <alpha-value>)',   /* charcoal (light) / pale slate (dark) */
+      },
+      fontFamily: {
+        sans: ['Inter','system-ui','Segoe UI','sans-serif'],
+        display: ['Fraunces','Georgia','serif'],
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(15,118,110,.06), 0 8px 24px -8px rgba(31,41,55,.12)',
+        lift: '0 2px 4px rgba(15,118,110,.08), 0 18px 44px -12px rgba(31,41,55,.22)',
+      },
+    }
+  }
+}
+</script>
+
+<style>
+  :root { color-scheme: light; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    background-color:#FFFBF0;
+    /* Ultra-subtle Thai-lattice geometric texture */
+    background-image:
+      radial-gradient(rgba(15,118,110,.045) 1px, transparent 1px),
+      radial-gradient(rgba(249,115,22,.03) 1px, transparent 1px);
+    background-size: 34px 34px, 34px 34px;
+    background-position: 0 0, 17px 17px;
+    color:#1F2937;
+  }
+
+  /* ---------- cards & fields ---------- */
+  .card { background:#fff; border:1px solid rgba(15,118,110,.10); border-radius:1.25rem;
+          box-shadow:0 1px 2px rgba(15,118,110,.06), 0 8px 24px -8px rgba(31,41,55,.10);
+          transition:border-color .2s, box-shadow .25s, transform .25s; }
+  .card:hover { border-color:rgba(20,184,166,.45); }
+  .field { background:#fff; border:1.5px solid #E2DCCD; border-radius:.8rem; padding:.7rem .95rem;
+           color:#1F2937; width:100%; font-weight:600; transition:.15s; }
+  .field:focus { border-color:#14B8A6; box-shadow:0 0 0 4px rgba(20,184,166,.16); outline:none; }
+  .field::placeholder { color:#9CA3AF; font-weight:400; }
+
+  /* ---------- option cards (radio-style selectors) ---------- */
+  .opt { cursor:pointer; background:#fff; border:1.5px solid #E8E2D4; border-radius:1rem;
+         transition:border-color .15s, transform .18s, box-shadow .18s, background .15s; width:100%; }
+  .opt:hover { border-color:#14B8A6; transform:translateY(-2px); box-shadow:0 10px 24px -10px rgba(15,118,110,.28); }
+  .opt:focus-visible { outline:3px solid rgba(20,184,166,.5); outline-offset:2px; }
+  .opt.sel { border-color:#0F766E; background:linear-gradient(180deg, rgba(20,184,166,.10), rgba(20,184,166,.04));
+             box-shadow:0 0 0 1px #0F766E, 0 10px 26px -10px rgba(15,118,110,.35); }
+  .opt.sel .opt-check { opacity:1; transform:scale(1); }
+  .opt-check { opacity:0; transform:scale(.5); transition:.18s;
+               background:#0F766E; color:#fff; border-radius:9999px; width:1.35rem; height:1.35rem;
+               display:inline-flex; align-items:center; justify-content:center; font-size:.7rem; flex-shrink:0; }
+
+  /* ---------- range sliders ---------- */
+  input[type=range]{ -webkit-appearance:none; appearance:none; height:8px; border-radius:999px;
+    background:linear-gradient(90deg,#0F766E,#14B8A6 55%,#F97316); outline:none; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:24px; height:24px; border-radius:50%;
+    background:#fff; border:3px solid #0F766E; cursor:pointer; box-shadow:0 2px 8px rgba(15,118,110,.4); transition:transform .12s; }
+  input[type=range]::-webkit-slider-thumb:hover{ transform:scale(1.12); }
+  input[type=range]::-moz-range-thumb{ width:24px; height:24px; border-radius:50%; background:#fff;
+    border:3px solid #0F766E; cursor:pointer; box-shadow:0 2px 8px rgba(15,118,110,.4); }
+  input[type=range]:focus-visible{ box-shadow:0 0 0 4px rgba(20,184,166,.25); }
+
+  input[type=checkbox]{ accent-color:#0F766E; }
+
+  /* ---------- hero ---------- */
+  .hero-overlay { background:linear-gradient(105deg, rgba(9,63,59,.88) 0%, rgba(15,118,110,.62) 45%, rgba(15,118,110,.18) 100%); }
+
+  .glassbar { background:rgba(255,251,240,.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+              border-bottom:1px solid rgba(15,118,110,.12); }
+
+  .btn-cta { background:linear-gradient(92deg,#F97316,#FB923C); color:#fff; font-weight:800;
+             box-shadow:0 6px 20px -6px rgba(249,115,22,.55); transition:transform .15s, box-shadow .2s, filter .15s; }
+  .btn-cta:hover { transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 12px 28px -8px rgba(249,115,22,.6); }
+  .btn-teal { background:linear-gradient(92deg,#0F766E,#14B8A6); color:#fff; font-weight:800;
+              box-shadow:0 6px 20px -6px rgba(15,118,110,.5); transition:transform .15s, filter .15s; }
+  .btn-teal:hover { transform:translateY(-2px); filter:brightness(1.06); }
+  .btn-ghost { background:#fff; border:1.5px solid #E2DCCD; font-weight:700; transition:.15s; }
+  .btn-ghost:hover { border-color:#14B8A6; color:#0F766E; }
+
+  /* ---------- decorative dividers ---------- */
+  .wave-divider { display:block; width:100%; height:56px; }
+
+  /* ---------- micro-animations ---------- */
+  .fade-up { animation:fadeUp .5s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+  @keyframes popIn { from{opacity:0; transform:scale(.92);} to{opacity:1; transform:scale(1);} }
+  .pop-in { animation:popIn .3s ease both; }
+  @keyframes confettiFall {
+    0%   { transform:translate(0,0) rotate(0deg); opacity:1; }
+    100% { transform:translate(var(--cx), var(--cy)) rotate(var(--cr)); opacity:0; }
+  }
+  .confetti-bit { position:fixed; width:10px; height:10px; border-radius:2px; pointer-events:none; z-index:90;
+                  animation:confettiFall .95s cubic-bezier(.2,.6,.4,1) forwards; }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up, .pop-in { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+
+  ::-webkit-scrollbar{ width:10px; } ::-webkit-scrollbar-thumb{ background:#C9BFA9; border-radius:9px; }
+  ::-webkit-scrollbar-thumb:hover{ background:#0F766E; }
+
+  /* ---------- print / PDF export ---------- */
+  #printArea{ display:none; }
+  @media print {
+    .no-print{ display:none !important; }
+    body{ background:#fff !important; color:#000 !important; }
+    #printArea{ display:block !important; color:#111; }
+  }
+</style>
+
+<style id="themeStyles">
+  /* ---------- theme tokens: light (default vars) vs dark (very dark deep blue) ---------- */
+  :root{
+    --page:#FFFBF0; --dot1:rgba(15,118,110,.045); --dot2:rgba(249,115,22,.03);
+    --ink-rgb:31 41 55;
+    --surface:#ffffff; --surface2:#ffffff; --tile:#F5F0E6;
+    --card-border:rgba(15,118,110,.10); --field-border:#E2DCCD; --opt-border:#E8E2D4;
+    --glass:rgba(255,251,240,.85); --glass-border:rgba(15,118,110,.12);
+  }
+  html.dark{
+    color-scheme:dark;
+    --page:#0A1428; --dot1:rgba(20,184,166,.05); --dot2:rgba(249,115,22,.04);
+    --ink-rgb:230 237 248;
+    --surface:#0F1D36; --surface2:#0C182E; --tile:#0C182E;
+    --card-border:rgba(20,184,166,.20); --field-border:#243456; --opt-border:#243456;
+    --glass:rgba(8,16,32,.85); --glass-border:rgba(20,184,166,.18);
+  }
+  body{
+    background-color:var(--page);
+    background-image:radial-gradient(var(--dot1) 1px, transparent 1px),radial-gradient(var(--dot2) 1px, transparent 1px);
+    color:rgb(var(--ink-rgb));
+    transition:background-color .25s, color .25s;
+  }
+  .card{ background:var(--surface); border-color:var(--card-border); }
+  .field{ background:var(--surface2); border-color:var(--field-border); color:rgb(var(--ink-rgb)); }
+  .opt{ background:var(--surface); border-color:var(--opt-border); }
+  .opt.sel{ background:linear-gradient(180deg, rgba(20,184,166,.14), rgba(20,184,166,.05)); }
+  .glassbar{ background:var(--glass); border-bottom-color:var(--glass-border); }
+  .btn-ghost{ background:var(--surface); border-color:var(--field-border); color:rgb(var(--ink-rgb)); }
+  html.dark .card:hover{ border-color:rgba(45,212,191,.55); }
+  html.dark .card{ box-shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5); }
+  /* brand text readable on navy */
+  html.dark .text-tealdeep{ color:#2DD4BF; }
+  html.dark .btn-ghost:hover{ color:#2DD4BF; }
+  /* advisory blocks recolored for dark */
+  html.dark .bg-red-50{ background:rgba(239,68,68,.10); }
+  html.dark .border-red-300{ border-color:rgba(239,68,68,.45); }
+  html.dark .text-red-700{ color:#FCA5A5; }
+  html.dark .bg-emerald-50{ background:rgba(16,185,129,.10); }
+  html.dark .border-emerald-300{ border-color:rgba(16,185,129,.45); }
+  html.dark .text-emerald-700{ color:#6EE7B7; }
+  html.dark .text-amber-700, html.dark .text-amber-600{ color:#FCD34D; }
+  html.dark .bg-sand\/50, html.dark .bg-sand\/60, html.dark .bg-sand\/70{ background:rgba(16,30,56,.85); }
+  html.dark .bg-white{ background:var(--surface); }
+  /* wave dividers follow the page background */
+  html.dark path[fill="#FFFBF0"]{ fill:#0A1428; }
+  /* slider thumbs on navy */
+  html.dark input[type=range]::-webkit-slider-thumb{ background:#0F1D36; border-color:#2DD4BF; }
+  html.dark input[type=range]::-moz-range-thumb{ background:#0F1D36; border-color:#2DD4BF; }
+  html.dark ::-webkit-scrollbar-thumb{ background:#24345F; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thaiholidaybudget.com/#org",
+      "name": "Genext Information Systems",
+      "url": "https://thaiholidaybudget.com/",
+      "logo": "https://thaiholidaybudget.com/unclePong.jpg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thaiholidaybudget.com/#website",
+      "url": "https://thaiholidaybudget.com/",
+      "name": "Uncle Pong's Thailand Holiday Estimator",
+      "publisher": { "@id": "https://thaiholidaybudget.com/#org" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Uncle Pong's Thailand Holiday Estimator",
+      "url": "https://thaiholidaybudget.com/",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "All (web browser)",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Free Thailand trip cost calculator for flights, hotels, food, transport, insurance and nights out, shown in your own currency and Thai baht.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://thaiholidaybudget.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much cash do I need to enter Thailand in 2026?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Immigration can require each tourist to show 20,000 THB per person (or 40,000 per family) in physical cash or foreign-currency equivalent on arrival." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Thailand Digital Arrival Card (TDAC) free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The TDAC is mandatory and completely free. Submit it on the official government portal within the 72 hours before arrival; any site charging a fee is not official." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Thai destination is cheapest for a holiday?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Khon Kaen is the most affordable base. Chiang Mai runs about 8% more, Pattaya and Hua Hin about 10%, Bangkok about 15%, and Phuket is priciest at roughly 25% above the cheapest." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much is a daily food budget in Thailand?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Street food runs about 300–600 THB per day, mid-range dining 700–1,200 THB, and upscale dining 1,500+ THB per day per person." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="font-sans text-ink min-h-screen antialiased">
+
+<!-- ═════════════════════════════════════════════════════════════
+     LANDING VIEW — hidden while the budget wizard is open
+     ═════════════════════════════════════════════════════════════ -->
+<div id="landing">
+
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<header class="no-print sticky top-0 z-40 glassbar">
+  <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+    <a href="#top" class="flex items-center gap-3 min-w-0">
+      <!-- USER IMAGE: unclePong.jpg - brand avatar in the navbar logo -->
+      <img src="unclePong.jpg" alt="Uncle Pong" class="w-10 h-10 rounded-full object-cover object-top ring-2 ring-aqua/60 shadow-card shrink-0" width="784" height="1168" />
+      <span class="min-w-0 leading-tight">
+        <span class="block font-display font-black text-tealdeep text-lg truncate">Uncle Pong's</span>
+        <span class="block text-[10px] font-bold tracking-[.18em] uppercase text-coral">Thailand Holiday Estimator</span>
+      </span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-ink/70" aria-label="Main">
+      <a href="#how" class="hover:text-tealdeep transition">How it works</a>
+      <a href="#smarter" class="hover:text-tealdeep transition">Travel smarter</a>
+      <a href="phrases.html" class="hover:text-tealdeep transition">Thai phrases</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <label class="sr-only" for="navCurrency">Display currency</label>
+      <select id="navCurrency" class="field !w-auto !py-1.5 !px-2.5 text-xs hidden sm:block" title="Display currency">
+        <option>USD</option><option>EUR</option><option>GBP</option><option>AUD</option><option>CAD</option>
+        <option>CHF</option><option>JPY</option><option>CNY</option><option>HKD</option><option>SGD</option>
+        <option>KRW</option><option>MYR</option><option>INR</option><option>RUB</option><option>THB</option>
+      </select>
+      <button id="themeBtn" onclick="toggleTheme()" class="btn-ghost text-xs px-3 py-2 rounded-xl" aria-label="Switch between dark and light theme">☀️ Light</button>
+      <button onclick="saveProgress(true)" class="btn-ghost text-xs px-3 py-2 rounded-xl hidden sm:block">💾 Save</button>
+      <button onclick="resetAll()" class="btn-ghost text-xs px-3 py-2 rounded-xl hidden sm:block">↺ Reset</button>
+      <button onclick="openWizard()" class="btn-cta text-xs sm:text-sm px-3.5 sm:px-5 py-2.5 rounded-xl whitespace-nowrap">Build my Budget</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="relative overflow-hidden" aria-label="Intro">
+  <!-- Golden-hour Thai longtail-boat beach (Unsplash) — LCP image, loaded eagerly -->
+  <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=2000&q=80"
+       alt="Longtail boats on a golden-hour Thai beach" fetchpriority="high"
+       class="absolute inset-0 w-full h-full object-cover" />
+  <div class="hero-overlay absolute inset-0"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <div class="max-w-2xl">
+      <p class="inline-flex items-center gap-2 bg-white/15 backdrop-blur px-4 py-1.5 rounded-full text-cream text-xs font-bold tracking-wide mb-5 ring-1 ring-white/25">
+        🌴 Real 2026 street-level prices · Pattaya · Bangkok · Phuket · Chiang Mai
+      </p>
+      <h1 class="font-display font-black text-4xl sm:text-6xl text-cream leading-[1.05] mb-5">
+        Know exactly what your <span class="text-ambery">Thailand holiday</span> will cost.
+        <span class="block text-2xl sm:text-3xl mt-3 text-white/85 font-bold font-sans">No surprises. No fantasy numbers.</span>
+      </h1>
+      <p class="text-white/85 text-lg mb-8 max-w-xl">
+        I'm <b>Uncle Pong</b> — your cheeky Thai uncle who's seen it all. Tell me how you travel and
+        I'll give you a real number for the whole trip, down to the last baht bus and beach beer.
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <button onclick="openWizard()" class="btn-cta px-8 py-4 rounded-2xl text-lg">Build my Budget →</button>
+        <a href="#how" class="px-6 py-4 rounded-2xl text-cream font-bold ring-1 ring-white/40 hover:bg-white/10 transition">How it works</a>
+      </div>
+      <p class="mt-6 text-white/70 text-sm font-medium">
+        ✓ 100% free &nbsp;·&nbsp; ✓ Runs in your browser &nbsp;·&nbsp; ✓ No sign-up &nbsp;·&nbsp; ✓ Your data never leaves your device
+      </p>
+    </div>
+
+    <!-- USER IMAGE: unclePong.jpg - hero portrait card of the man himself -->
+    <div class="hidden lg:block absolute right-10 bottom-10 w-56 rotate-2 fade-up">
+      <div class="bg-cream rounded-3xl p-3 shadow-lift">
+        <img src="unclePong.jpg" alt="Uncle Pong — your cheeky Thai uncle and host" class="rounded-2xl w-full h-60 object-cover object-top" loading="lazy" decoding="async" width="784" height="1168" />
+        <p class="text-center text-xs font-bold text-tealdeep py-2">Your cheeky Thai uncle · seen it all since the '80s</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- wave divider into the page -->
+  <svg class="wave-divider relative text-cream" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#FFFBF0" d="M0,32 C240,64 480,0 720,16 C960,32 1200,64 1440,24 L1440,56 L0,56 Z"/>
+  </svg>
+</section>
+
+<!-- ══════════════════ TRUST BAR ══════════════════ -->
+<section class="max-w-6xl mx-auto px-4 -mt-2 mb-14" aria-label="Why trust this">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+    <div class="card p-4 text-center"><p class="text-2xl font-black text-tealdeep">2026</p><p class="text-xs text-ink/60 font-semibold mt-1">Prices researched on the ground, not guessed</p></div>
+    <div class="card p-4 text-center"><p class="text-2xl font-black text-coral">10</p><p class="text-xs text-ink/60 font-semibold mt-1">Cost categories — flights to the last beach beer</p></div>
+    <div class="card p-4 text-center"><p class="text-2xl font-black text-tealdeep">15</p><p class="text-xs text-ink/60 font-semibold mt-1">Currencies with live THB conversion</p></div>
+    <div class="card p-4 text-center"><p class="text-2xl font-black text-coral">0</p><p class="text-xs text-ink/60 font-semibold mt-1">Sign-ups, trackers of your inputs, or data sent anywhere</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
+<section id="how" class="max-w-6xl mx-auto px-4 mb-16 scroll-mt-24" aria-label="How it works">
+  <div class="text-center mb-10">
+    <p class="text-coral font-bold text-sm tracking-[.15em] uppercase mb-2">Simple as som tam</p>
+    <h2 class="font-display font-black text-3xl sm:text-4xl text-ink">How it works</h2>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card p-6 fade-up">
+      <div class="w-12 h-12 rounded-2xl bg-tealdeep/10 text-tealdeep grid place-items-center mb-4">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <p class="font-black text-lg mb-1"><span class="text-coral">1.</span> Pick your Thailand</p>
+      <p class="text-sm text-ink/60">Pattaya, Phuket, Bangkok, Chiang Mai and more — each destination sets realistic local prices automatically.</p>
+    </div>
+    <div class="card p-6 fade-up" style="animation-delay:.06s">
+      <div class="w-12 h-12 rounded-2xl bg-coral/10 text-coral grid place-items-center mb-4">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/></svg>
+      </div>
+      <p class="font-black text-lg mb-1"><span class="text-coral">2.</span> Set your style</p>
+      <p class="text-sm text-ink/60">Hostel or 5-star, street noodles or steak, baht bus or Grab — one easy question page at a time.</p>
+    </div>
+    <div class="card p-6 fade-up" style="animation-delay:.12s">
+      <div class="w-12 h-12 rounded-2xl bg-ambery/15 text-amber-600 grid place-items-center mb-4">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <p class="font-black text-lg mb-1"><span class="text-coral">3.</span> Watch it total live</p>
+      <p class="text-sm text-ink/60">A running total follows you through every step — in your currency and Thai baht. No surprises at the end.</p>
+    </div>
+    <div class="card p-6 fade-up" style="animation-delay:.18s">
+      <div class="w-12 h-12 rounded-2xl bg-tealdeep/10 text-tealdeep grid place-items-center mb-4">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      </div>
+      <p class="font-black text-lg mb-1"><span class="text-coral">4.</span> Get the verdict</p>
+      <p class="text-sm text-ink/60">The final page shows the full breakdown, chart and Uncle Pong's verdict — save it, export a PDF, or share it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ QUICK PRESETS ══════════════════ -->
+<section class="max-w-6xl mx-auto px-4 mb-16" aria-label="Quick presets">
+  <div class="text-center mb-6">
+    <h2 class="font-display font-black text-2xl sm:text-3xl text-ink">In a hurry? Start from a classic trip</h2>
+    <p class="text-ink/60 text-sm mt-2">One tap fills sensible defaults and jumps straight to your verdict — then step back to tweak anything.</p>
+  </div>
+  <div class="grid sm:grid-cols-3 gap-4">
+    <button onclick="applyPreset('pattaya7')" class="opt overflow-hidden text-left group" aria-label="Apply preset: Pattaya Party, 7 days">
+      <div class="relative h-32">
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=70" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <span class="absolute top-2 right-2 bg-coral text-white text-[10px] font-black px-2.5 py-1 rounded-full">7 DAYS</span>
+      </div>
+      <div class="p-4">
+        <p class="font-black">🎉 Pattaya Party</p>
+        <p class="text-xs text-ink/55 mt-1">Mid-range hotel, big nights out, Walking Street drinks priced honestly.</p>
+      </div>
+    </button>
+    <button onclick="applyPreset('phuket10')" class="opt overflow-hidden text-left group" aria-label="Apply preset: Phuket Relaxation, 10 days">
+      <div class="relative h-32">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=70" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <span class="absolute top-2 right-2 bg-tealdeep text-white text-[10px] font-black px-2.5 py-1 rounded-full">10 DAYS</span>
+      </div>
+      <div class="p-4">
+        <p class="font-black">🏝️ Phuket Relaxation</p>
+        <p class="text-xs text-ink/55 mt-1">4-star comfort, good food, gentle evenings — island prices included.</p>
+      </div>
+    </button>
+    <button onclick="applyPreset('mix14')" class="opt overflow-hidden text-left group" aria-label="Apply preset: Bangkok + Beach Mix, 14 days">
+      <div class="relative h-32">
+        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=900&q=70" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+        <span class="absolute top-2 right-2 bg-ambery text-ink text-[10px] font-black px-2.5 py-1 rounded-full">14 DAYS</span>
+      </div>
+      <div class="p-4">
+        <p class="font-black">🏙️ Bangkok + Beach Mix</p>
+        <p class="text-xs text-ink/55 mt-1">Two weeks moving around — city buzz, beach recovery, balanced budget.</p>
+      </div>
+    </button>
+  </div>
+</section>
+
+<!-- ══════════════════ TRAVEL SMARTER ══════════════════ -->
+<section id="smarter" class="relative py-16 scroll-mt-20" style="background:var(--tile)" aria-label="Travel smarter">
+  <svg class="absolute -top-px left-0 wave-divider rotate-180" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path fill="#FFFBF0" d="M0,32 C240,64 480,0 720,16 C960,32 1200,64 1440,24 L1440,56 L0,56 Z"/></svg>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <p class="text-coral font-bold text-sm tracking-[.15em] uppercase mb-2">Uncle Pong's field notes</p>
+      <h2 class="font-display font-black text-3xl sm:text-4xl text-ink">Travel smarter, spend less</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card p-6">
+        <p class="font-black text-lg mb-2">💵 Cash & exchange</p>
+        <p class="text-sm text-ink/65">Bring large notes ($100/€100/£50) — they get better rates. The best exchange counters in the country are <b>SuperRich on Level B</b> at Suvarnabhumi airport. Every foreign-card ATM withdrawal adds a <b>220 THB fee</b>, so pull 10,000–20,000 at a time. In town, SuperRich and TT Exchange at the malls beat hotel rates every day of the week.</p>
+      </div>
+      <div class="card p-6">
+        <p class="font-black text-lg mb-2">🛂 Entry, sorted</p>
+        <p class="text-sm text-ink/65">The <b>TDAC arrival card is free</b> — do it in the 72 hours before you fly, only on the official site. Carry <b>20,000 THB per person in real cash</b> for immigration spot checks, keep your passport valid 6+ months, and have your first hotel booking ready to show. Five minutes of prep, zero kiosk sweat.</p>
+      </div>
+      <div class="card p-6">
+        <p class="font-black text-lg mb-2">🏍️ Roads & cover</p>
+        <p class="text-sm text-ink/65">Thailand's roads claim ~50 lives a day — most on scooters. If you're renting one, wear the helmet, skip the beers, and get <b>proper travel insurance (~180–360 THB/day)</b>. Thai private hospitals are superb but bill in cash up front. The insurance step in the estimator is the cheapest peace of mind you'll ever buy.</p>
+      </div>
+    </div>
+    <!-- USER IMAGE: finalboss.jpeg - the gold-shop 'budget final boss' cautionary tale -->
+    <div class="card mt-6 p-5 md:flex items-center gap-6">
+      <img loading="lazy" decoding="async" src="finalboss.jpeg" alt="A Pattaya gold-shop scene — the little 'something to remember you by' that quietly blows the budget" class="w-full md:w-80 rounded-2xl shadow-card shrink-0" width="1536" height="1024" />
+      <div class="pt-4 md:pt-0">
+        <p class="font-black text-lg mb-2">👑 Beware the final boss</p>
+        <p class="text-sm text-ink/65">Every budget survives the flights, the hotel, even Walking Street... and then meets the gold shop, the custom suit, or the "something to remember you by". That's why the estimator has a <b>Big purchases</b> line and a <b>Buffer</b> slider — feed them honestly and nothing can ambush you. Uncle Pong has seen grown men wire money home for the airport taxi. Don't be that legend.</p>
+      </div>
+    </div>
+
+    <!-- Thai phrases teaser → standalone page -->
+    <div class="card mt-6 p-6 sm:p-8 text-center" style="background:linear-gradient(120deg,#0F766E,#14B8A6)">
+      <p class="font-display font-black text-2xl text-cream mb-2">🇹🇭 Speak a little, smile a lot</p>
+      <p class="text-white/80 text-sm max-w-lg mx-auto mb-5">50 handy Thai phrases — greetings, haggling, ordering, nightlife and emergencies — searchable, categorized, tap-to-copy.</p>
+      <a href="phrases.html" class="btn-cta inline-block px-7 py-3.5 rounded-2xl">Open the phrasebook →</a>
+    </div>
+  </div>
+  <svg class="absolute -bottom-px left-0 wave-divider" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path fill="#FFFBF0" d="M0,32 C240,64 480,0 720,16 C960,32 1200,64 1440,24 L1440,56 L0,56 Z"/></svg>
+</section>
+
+</main>
+
+  <!-- ==================== SIDE RAILS + LEADERBOARD (in side gutters, just above footer; scroll with page, not fixed) ==================== -->
+  <style>
+    .rail-anchor{ position:relative; }
+    .rail-ad{ display:none; }
+    @media (min-width:1500px){
+      .rail-ad{ display:block; position:absolute; bottom:0; width:160px; height:300px; z-index:20; }
+      .rail-ad.rail-left{  right:calc(50% + 584px); }
+      .rail-ad.rail-right{ left:calc(50% + 584px); }
+    }
+  </style>
+  <div class="rail-anchor no-print">
+    
+    
+
+    <!-- Center leaderboard 728x90 -->
+    <section class="no-print w-full" aria-label="Advertisement">
+      <div class="max-w-6xl mx-auto px-4 py-8">
+        <p class="text-center text-[10px] uppercase tracking-[0.2em] text-ink/30 mb-3">Advertisement</p>
+        <div class="flex justify-center overflow-x-auto">
+          <div class="shrink-0" style="width:728px;height:90px">
+            <script type="text/javascript">
+              atOptions = { 'key' : '6bf56727ac0e1458327e400fcbe88d85', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/6bf56727ac0e1458327e400fcbe88d85/invoke.js"></script>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<footer class="no-print relative mt-16" style="background:#0F3D39" data-xadr-footer><div class="xadr xadr-l" aria-label="Advertisement"><iframe title="Advertisement" width="160" height="300" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:0;display:block;overflow:hidden" srcdoc='<body style="margin:0;overflow:hidden"><script type="text/javascript">atOptions = {"key":"2b98a36398b21cc769231ed802fdcd1e","format":"iframe","height":300,"width":160,"params":{}};</script><script type="text/javascript" src="https://www.highperformanceformat.com/2b98a36398b21cc769231ed802fdcd1e/invoke.js"></script><style class="xadr-fix">.xadr{position:absolute!important;top:auto!important;bottom:calc(100% + 100px)!important;width:160px!important;z-index:40;line-height:0}.xadr iframe{border:0;display:block;overflow:hidden}.xadr-l{left:calc(50% - 740px)!important;right:auto!important}.xadr-r{right:calc(50% - 740px)!important;left:auto!important}@media(max-width:1500px){.xadr{display:none!important}}[data-xadr-footer]{position:relative}</style>
+</body>'></iframe></div><div class="xadr xadr-r" aria-label="Advertisement"><iframe title="Advertisement" width="160" height="300" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:0;display:block;overflow:hidden" srcdoc='<body style="margin:0;overflow:hidden"><script type="text/javascript">atOptions = {"key":"2b98a36398b21cc769231ed802fdcd1e","format":"iframe","height":300,"width":160,"params":{}};</script><script type="text/javascript" src="https://www.highperformanceformat.com/2b98a36398b21cc769231ed802fdcd1e/invoke.js"></script></body>'></iframe></div>
+  <div class="max-w-6xl mx-auto px-4 py-12 text-center">
+    <!-- USER IMAGE: unclePong.jpg - warm sign-off avatar in the footer -->
+    <img src="unclePong.jpg" alt="" loading="lazy" decoding="async" class="w-16 h-16 rounded-full object-cover object-top mx-auto ring-2 ring-ambery/70 mb-4" width="784" height="1168" />
+    <p class="text-cream/90 font-display font-bold text-xl mb-2">"Plan the baht, then enjoy every one of them."</p>
+    <p class="text-cream/60 text-sm max-w-2xl mx-auto mb-8">Estimates are planning ballparks based on mid-2026 research, not guaranteed prices. Spend responsibly, drink water, know your limits, respect local laws and the people you meet. Travel insured. Have a great trip. — Uncle Pong 🌴</p>
+    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-cream/70" aria-label="Footer">
+      <a href="/about" class="hover:text-ambery transition">About</a>
+      <a href="/contact" class="hover:text-ambery transition">Contact</a>
+      <a href="phrases.html" class="hover:text-ambery transition">Thai Phrases</a>
+      <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
+      <a href="/cookies" class="hover:text-ambery transition">Cookie Policy</a>
+      <a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a>
+      <a href="terms.html" class="hover:text-ambery transition">Terms &amp; Disclaimer</a>
+      <a href="accessibility.html" class="hover:text-ambery transition">Accessibility</a>
+    </nav>
+    <p class="mt-6 text-xs text-cream/40">© 2026 Genext Information Systems. All rights reserved. · <a href="https://thaiholidaybudget.com" class="hover:text-ambery">thaiholidaybudget.com</a> · V2.0</p>
+    <p class="mt-1 text-xs text-cream/40">For entertainment purposes only. Not affiliated with the Thai Ministry of Tourism — please do your own research. 🌴</p>
+  </div>
+</footer>
+
+</div><!-- /#landing -->
+
+<!-- ═════════════════════════════════════════════════════════════
+     BUDGET WIZARD — full-screen storyboard, one step per page.
+     Hidden until "Build my budget" is clicked.
+     ═════════════════════════════════════════════════════════════ -->
+<div id="wizardView" class="hidden no-print">
+
+  <!-- wizard header -->
+  <header class="sticky top-0 z-40 glassbar">
+    <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+      <button onclick="exitWizard()" class="flex items-center gap-3 min-w-0 text-left" title="Back to the main page">
+        <!-- USER IMAGE: unclePong.jpg - wizard header avatar, click to exit -->
+        <img src="unclePong.jpg" alt="" class="w-9 h-9 rounded-full object-cover object-top ring-2 ring-aqua/60 shrink-0" width="784" height="1168" />
+        <span class="min-w-0 leading-tight hidden sm:block">
+          <span class="block font-display font-black text-tealdeep text-base truncate">Uncle Pong's</span>
+          <span class="block text-[9px] font-bold tracking-[.18em] uppercase text-coral">Budget Builder</span>
+        </span>
+      </button>
+      <span id="stepLabel" class="text-xs font-bold text-ink/50 text-center"></span>
+      <div class="flex items-center gap-2">
+        <button id="themeBtnW" onclick="toggleTheme()" class="btn-ghost text-xs px-3 py-2 rounded-xl" aria-label="Switch between dark and light theme">☀️ Light</button>
+        <button onclick="saveProgress(true)" class="btn-ghost text-xs px-3 py-2 rounded-xl">💾 Save</button>
+        <button onclick="resetAll()" class="btn-ghost text-xs px-3 py-2 rounded-xl hidden sm:block">↺ Reset</button>
+        <button onclick="exitWizard()" class="btn-ghost text-xs px-3 py-2 rounded-xl" aria-label="Exit the budget builder">✕ Exit</button>
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto px-4 pb-2.5">
+      <div id="progressDots" class="flex gap-1.5 mb-2.5" role="tablist" aria-label="Steps"></div>
+      <div class="flex items-center justify-between gap-3">
+        <button id="backBtn" onclick="go(-1)" class="btn-ghost text-sm px-5 py-2 rounded-xl disabled:opacity-30">← Back</button>
+        <button id="nextBtn" onclick="go(1)" class="btn-cta text-sm px-6 py-2 rounded-xl whitespace-nowrap">Next →</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 pt-6 pb-44">
+
+    <!-- ── STEP 0: TRIP BASICS ── -->
+    <section data-step class="step">
+      <div class="card p-5 sm:p-8 fade-up">
+        <div class="flex flex-col sm:flex-row gap-5 items-center sm:items-start mb-6">
+          <div class="flex-1">
+            <p class="text-coral font-bold text-sm mb-1">Khun farang, welcome 🍻</p>
+            <h2 class="font-display font-black text-3xl sm:text-4xl mb-3">Let's budget your <span class="text-tealdeep">Thailand</span> trip properly.</h2>
+            <p class="text-ink/65">Give me the details and I'll give you a real number, not a fantasy. No surprises at checkout, no judgment, just smart planning.</p>
+          </div>
+          <!-- USER IMAGE: unclePong.jpg - welcome step portrait -->
+          <img loading="lazy" decoding="async" src="unclePong.jpg" alt="Uncle Pong — your cheeky Thai uncle and host" class="w-36 h-44 sm:w-40 sm:h-52 rounded-2xl object-cover object-top shadow-lift shrink-0" width="784" height="1168" />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-1.5" for="dest">Where in Thailand? 📍</label>
+          <select id="dest" class="field">
+            <option value="phuket">🏝️ Phuket — island & beaches</option>
+            <option value="bangkok">🏙️ Bangkok — the big city</option>
+            <option value="pattaya" selected>🌴 Pattaya — beach & wild nightlife if you can handle it</option>
+            <option value="huahin">🏖️ Hua Hin — quieter beach life for the less adventurous</option>
+            <option value="chiangmai">⛰️ Chiang Mai — cool & cultural</option>
+            <option value="khonkaen">🌾 Khon Kaen — Isaan, most affordable but boring</option>
+            <option value="multi">🧳 Multiple cities — moving around</option>
+          </select>
+          <p id="destNote" class="text-xs font-semibold text-coral mt-1.5"></p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nickname">What should I call you? 😎</label>
+            <input id="nickname" class="field" placeholder="Big Dog, The Legend, Boss..." />
+            <p class="text-xs text-ink/40 mt-1">I'll use this all trip.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="travelers">How many travelers?</label>
+            <input id="travelers" type="number" min="1" max="20" value="1" class="field" />
+            <p class="text-xs text-ink/40 mt-1">Personal costs scale per head; hotel & taxi stay shared.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="currency">Your money 💱</label>
+            <select id="currency" class="field">
+              <option value="USD">🇺🇸 USA — USD ($)</option>
+              <option value="EUR">🇪🇺 Eurozone — EUR (€)</option>
+              <option value="GBP">🇬🇧 UK — GBP (£)</option>
+              <option value="AUD">🇦🇺 Australia — AUD (A$)</option>
+              <option value="CAD">🇨🇦 Canada — CAD (C$)</option>
+              <option value="CHF">🇨🇭 Switzerland — CHF</option>
+              <option value="JPY">🇯🇵 Japan — JPY (¥)</option>
+              <option value="CNY">🇨🇳 China — CNY (¥)</option>
+              <option value="HKD">🇭🇰 Hong Kong — HKD (HK$)</option>
+              <option value="SGD">🇸🇬 Singapore — SGD (S$)</option>
+              <option value="KRW">🇰🇷 South Korea — KRW (₩)</option>
+              <option value="MYR">🇲🇾 Malaysia — MYR (RM)</option>
+              <option value="INR">🇮🇳 India — INR (₹)</option>
+              <option value="RUB">🇷🇺 Russia — RUB (₽)</option>
+              <option value="THB">🇹🇭 Thailand — THB (฿)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="startDate">Travel start date 📅</label>
+            <input id="startDate" type="date" class="field" />
+            <p class="text-xs text-ink/40 mt-1">When you land in Thailand.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="totalDays">Total days (1–60)</label>
+            <input id="totalDays" type="number" min="1" max="60" value="" placeholder="e.g. 14" class="field" />
+            <p id="nightsNote" class="text-xs font-semibold text-coral mt-1">Enter your total days on the ground.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- dynamic season + weather + packing -->
+      <div id="seasonCard" class="card p-5 sm:p-8 mt-4 fade-up" style="display:none"></div>
+    </section>
+
+    <!-- ── STEP 1: GETTING THERE ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <!-- USER IMAGE: unclePongAirport.jpg - Uncle Pong arriving at the airport, flights step banner -->
+        <img loading="lazy" decoding="async" src="unclePongAirport.jpg" alt="Uncle Pong arriving at the airport with his suitcase" class="w-full h-40 sm:h-56 object-cover rounded-2xl mb-5 shadow-card" width="1168" height="784" />
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">✈️ Getting there</h2>
+        <p class="text-ink/55 mb-5">Round-trip airfare plus baggage, per person, in your currency. Don't have a quote? Ballpark it — you can fix it later.</p>
+        <label class="block text-sm font-bold mb-1.5" for="airfare">Round-trip airfare + bags (per person, <span id="curLbl1">USD</span>)</label>
+        <input id="airfare" type="number" min="0" value="0" class="field text-lg" />
+        <p class="text-xs text-ink/45 mt-2">Uncle Pong's tip: mid-week flights and a Tuesday return are usually the cheapest. Skip the extra checked bag if you can — Pattaya tailors are cheap and you'll shop anyway.</p>
+        <div class="rounded-2xl border border-aqua/30 bg-aqua/5 p-4 mt-4">
+          <p class="font-bold text-tealdeep mb-1">🧭 Uncle Pong's tip: book flights smart</p>
+          <p class="text-sm text-ink/70">Use <b>Google Flights</b> and <b>Kayak.com</b> to find the best routes and prices. Explore <b>flexible dates</b> to uncover cheaper options, then filter for <b>shorter layovers</b>. Prioritize top-rated hub airports like <b>Doha, Tokyo, Dubai, or Seoul</b> for better facilities and smoother connections. Compare options side by side — then book <b>directly on the airline's website</b> rather than through the aggregator. Booking direct gives you better customer service, easier changes or cancellations, and stronger protection if anything goes wrong.</p>
+        </div>
+        <div class="rounded-2xl border border-coral/40 bg-coral/5 p-4 mt-4">
+          <p class="font-bold text-coral mb-1">⚠️ IMPORTANT NOTICE: Proof of Onward Travel for Thailand</p>
+          <p class="text-sm text-ink/70">When departing from your home airport (US, Europe, or elsewhere), <b>airlines are required to verify</b> that you have an outbound/onward flight from Thailand if you are entering on a <b>Visa on Arrival (VOA)</b> or <b>visa-free</b> basis.</p>
+          <p class="text-sm text-ink/70 mt-2">If a full round-trip ticket doesn't fit your current budget, we suggest booking a cheap, no luggage, non reserved seat <b>fully refundable one-way ticket</b> to Malaysia or Singapore. Choose a departure date <b>within 30 days of your arrival in Thailand</b> — this serves as valid proof of onward travel that you can later cancel.</p>
+          <p class="text-sm font-bold text-coral mt-2">Without this documentation, you may likely be denied boarding at your departure airport headed to Thailand.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STEP 2: ENTRY CHECKLIST ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🛂 Entry checklist</h2>
+        <p class="text-ink/55 mb-5">Get this right and you breeze through immigration. Get it wrong and you're stuck at a kiosk sweating.</p>
+
+        <div class="rounded-2xl border border-aqua/30 bg-aqua/5 p-4 mb-4">
+          <p class="font-bold text-tealdeep">Thailand Digital Arrival Card (TDAC) — mandatory & 100% FREE</p>
+          <p class="text-sm text-ink/70 mt-1">Every visitor must submit it, in the <strong>72-hour (3-day) window</strong> before you arrive. It takes 5 minutes and costs <strong>0 baht</strong>. Only ever use the official government portal — any site charging a fee is a scam.</p>
+          <a href="https://tdac.immigration.go.th" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-xl btn-teal text-sm">🔗 Open the official TDAC site</a>
+        </div>
+
+        <div class="rounded-2xl border border-ambery/50 bg-ambery/10 p-4 mb-5">
+          <p class="font-bold text-amber-700">💵 Proof of funds — mandatory cash to carry</p>
+          <p class="text-sm text-ink/70 mt-1">For 2026, immigration can require each tourist to show <strong>20,000 THB per person</strong> (or 40,000 per family) — in <strong>physical cash</strong> or foreign-currency equivalent. A bank balance on your phone is often rejected. No cash, no entry. It's included in your final budget as a <em>Proof of funds</em> line so you remember to set it aside.</p>
+          <p id="fundsNote" class="text-sm font-bold text-amber-700 mt-2"></p>
+        </div>
+
+        <div class="space-y-2.5">
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_tdac" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>TDAC submitted</b> (within 72h of arrival) — got the QR code by email</span></label>
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_passport" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>Passport valid 6+ months</b> beyond your travel dates</span></label>
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_visa" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>Visa sorted</b> — visa-on-arrival or a proper tourist visa for your nationality (rules change constantly, so double-check)</span></label>
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_onward" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>Proof of onward travel</b> (return/onward ticket) ready to show</span></label>
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_booking" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>Proof of booked accommodation</b> — at least 1 night, ready to show</span></label>
+          <label class="flex items-start gap-3 opt p-3.5"><input type="checkbox" id="ck_funds" class="mt-1 w-5 h-5 shrink-0"><span class="text-sm"><b>20,000 THB cash per person</b> ready to show (proof of funds)</span></label>
+        </div>
+        <p class="text-xs text-ink/45 mt-4">Uncle Pong says: pull the 20k baht from an ATM at the airport or bring crisp foreign notes. Don't rely on showing your banking app — officers want to see real cash.</p>
+        <!-- USER IMAGE: travel.jpg - Uncle Pong at immigration getting stamped in -->
+        <img loading="lazy" decoding="async" src="travel.jpg" alt="Uncle Pong getting his passport stamped at Royal Thai Immigration — Welcome to Thailand" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="832" height="1248" />
+      </div>
+    </section>
+
+    <!-- ── STEP 3: INSURANCE ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🛡️ Travel insurance</h2>
+        <p class="text-ink/55 mb-5">A scooter scrape or a bad plate of seafood can cost more than your flight. Good cover is cheap insurance against a very expensive week.</p>
+
+        <div class="flex gap-2 mb-5" role="group" aria-label="Insurance choice">
+          <button data-ins="1" class="ins-toggle flex-1 opt p-3.5 font-bold">Yes, cover me ✅</button>
+          <button data-ins="0" class="ins-toggle flex-1 opt p-3.5 font-bold">No thanks</button>
+        </div>
+
+        <div id="insBox" class="space-y-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="insDays">Days of coverage</label>
+            <input id="insDays" type="number" min="0" value="0" class="field" />
+            <p class="text-xs text-ink/40 mt-1">Auto-filled from your trip length — adjust if needed.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="insPerDay">Cost per day: <span id="insPerDayLbl" class="text-coral">250 THB</span></label>
+            <input id="insPerDay" type="range" min="100" max="450" step="10" value="250" class="w-full">
+            <div class="flex justify-between text-xs text-ink/40 mt-1"><span>Basic ~180</span><span>Recommended ~250</span><span>Premium ~360+</span></div>
+          </div>
+          <p class="text-xs text-ink/50">Uncle Pong's rule: comprehensive medical runs roughly $5–10/day (~180–360 THB). Thai private hospitals are excellent but bill in cash up front — don't skip this.</p>
+        </div>
+
+        <div class="rounded-2xl border border-red-300 bg-red-50 p-4 mt-5">
+          <p class="font-bold text-red-700 mb-2">🏍️ Uncle Pong's rule — Thailand's roads are deadly serious</p>
+          <p class="text-sm text-ink/75 mb-2">Thailand has one of Asia's highest road-death rates — about <b>25.4 per 100,000 people</b> (WHO). That's nearly <b>18,000 fatalities a year</b>, roughly <b>50 deaths every single day</b>. Motorcyclists are <b>84%</b> of the victims, and holiday periods turn into slaughter — hundreds killed in a matter of days.</p>
+          <p class="text-sm text-ink/75 mb-2">Tourists renting scooters are especially at risk. A single crash can mean hospital bills of <b>$10,000–$50,000</b> without breaking a sweat. No travel insurance? You're paying every baht of it yourself — and your regular home insurance usually won't help here.</p>
+          <p class="text-sm text-ink/75">Don't be stupid. Get proper travel insurance before you hit the road. It's cheap protection against some genuinely deadly streets.</p>
+          <!-- USER IMAGE: hospital.jpg - Uncle Pong in a Thai hospital bed, road-safety warning -->
+          <img loading="lazy" decoding="async" src="hospital.jpg" alt="Uncle Pong recovering in a Thai hospital after a scooter mishap" class="w-full max-w-xs mx-auto rounded-xl mt-4 shadow-card" width="832" height="1248" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STEP 4: WHERE YOU'LL CRASH ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🛏️ Where you'll crash</h2>
+        <p class="text-ink/55 mb-5">Pick your comfort level — your chosen destination already sets the regional price. Override the nightly rate any time.</p>
+
+        <p class="text-sm font-bold mb-2">Comfort tier</p>
+        <div id="tierGrid" class="grid sm:grid-cols-2 gap-3 mb-5"></div>
+
+        <label class="block text-sm font-bold mb-1.5" for="accomNight">Nightly rate (THB) — override anything</label>
+        <input id="accomNight" type="number" min="0" value="1200" class="field text-lg">
+        <p id="accomTotalNote" class="text-xs font-semibold text-coral mt-2"></p>
+        <p class="text-xs text-ink/50 mt-3">Uncle Pong's tip: book the first 2–3 nights online, then walk in and negotiate the rest once you're there — low-season walk-in rates can be 30% cheaper. And "guest-friendly" in a listing just means no silly join-in fees for visitors; pick a pool you'll actually use.</p>
+        <!-- USER IMAGE: hotel2.jpg - Uncle Pong checking in at a guesthouse -->
+        <img loading="lazy" decoding="async" src="hotel2.jpg" alt="Uncle Pong checking in at a Thai guesthouse reception with his luggage" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="832" height="1248" />
+      </div>
+    </section>
+
+    <!-- ── STEP 5: EATING WELL ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🍜 Eating well</h2>
+        <p class="text-ink/55 mb-5">Thai food goes from 50-baht street noodles to 800-baht steaks. Tell me your style.</p>
+
+        <p class="text-sm font-bold mb-2">Mostly which kind of food?</p>
+        <div id="foodGrid" class="grid sm:grid-cols-3 gap-3 mb-5"></div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="foodMeals">Meals out per day</label>
+            <input id="foodMeals" type="number" min="0" max="6" value="3" class="field">
+          </div>
+          <label class="flex items-center justify-between opt p-3.5 self-end">
+            <span class="text-sm font-semibold">Big 7-Eleven snacker? 🥤 <span class="text-ink/40 font-normal">(+120/day)</span></span>
+            <input type="checkbox" id="food711" class="w-5 h-5 shrink-0">
+          </label>
+        </div>
+
+        <label class="block text-sm font-bold mb-1.5" for="foodPerDay">Daily food budget (THB) — <span id="foodPerDayLbl" class="text-coral">900</span></label>
+        <input id="foodPerDay" type="range" min="0" max="2500" step="50" value="900" class="w-full">
+        <div class="flex justify-between text-xs text-ink/40 mt-1"><span>Budget 300-600</span><span>Mid 700-1,200</span><span>Splurge 1,500+</span></div>
+        <p id="foodTotalNote" class="text-xs font-semibold text-coral mt-2"></p>
+        <div class="mt-4 rounded-2xl border border-aqua/25 bg-aqua/5 p-3.5">
+          <p class="text-sm text-ink/65">Uncle Pong's tip: the best pad krapow of your life is a 60-baht plastic-chair joint, not the fancy place. Eat where the Thais queue — street food on a plastic stool beats luxury dining back home.</p>
+        </div>
+        <!-- USER IMAGE: eating.jpg - Uncle Pong eating at a local spot -->
+        <img loading="lazy" decoding="async" src="eating.jpg" alt="Uncle Pong tucking into a plate of rice at a local spot" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="832" height="1248" />
+      </div>
+    </section>
+
+    <!-- ── STEP 6: GETTING AROUND ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🚕 Getting around</h2>
+        <p class="text-ink/55 mb-5">Airport run plus daily zipping about. Pattaya is small but the airport is 2 hours out.</p>
+
+        <p class="text-sm font-bold mb-2">Airport transfer (round trip, both ways)</p>
+        <div id="airportGrid" class="grid sm:grid-cols-3 gap-3 mb-6"></div>
+
+        <p class="text-sm font-bold mb-2">Daily get-around style</p>
+        <div id="dailyTransGrid" class="grid sm:grid-cols-3 gap-3 mb-5"></div>
+
+        <label class="block text-sm font-bold mb-1.5" for="transPerDay">Daily transport budget (THB) — <span id="transPerDayLbl" class="text-coral">200</span></label>
+        <input id="transPerDay" type="range" min="0" max="1200" step="20" value="200" class="w-full">
+        <div class="flex justify-between text-xs text-ink/40 mt-1"><span>Baht bus 30-100</span><span>Bolt/Grab 150-400</span><span>Moving a lot 500+</span></div>
+        <p id="transTotalNote" class="text-xs font-semibold text-coral mt-2"></p>
+        <p class="text-xs text-ink/50 mt-3">Uncle Pong's tip: the 10-baht baht bus along Beach Rd is the local move — just hop on, press the buzzer to get off. Bolt/Grab beats street taxis on price every time.</p>
+        <!-- USER IMAGE: transpot.jpg - Uncle Pong in the back of a Grab -->
+        <img loading="lazy" decoding="async" src="transpot.jpg" alt="Uncle Pong relaxing in the back of a Grab car cruising through town" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="832" height="1248" />
+      </div>
+    </section>
+
+    <!-- ── STEP 7: SUNDRIES & SHOPPING ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🛍️ Sundries & shopping</h2>
+        <p class="text-ink/55 mb-5">Water, laundry, toiletries, sunscreen, a cheeky tailored shirt, little souvenirs, tips. It adds up quietly.</p>
+        <p class="text-sm font-bold mb-3">How much of a spender are you?</p>
+        <div id="shopGrid" class="grid sm:grid-cols-3 gap-3 mb-5"></div>
+        <label class="block text-sm font-bold mb-1.5" for="shopPerDay">Daily sundries (THB) — <span id="shopPerDayLbl" class="text-coral">350</span></label>
+        <input id="shopPerDay" type="range" min="0" max="1500" step="25" value="350" class="w-full">
+        <div class="flex justify-between text-xs text-ink/40 mt-1"><span>Light 200</span><span>Normal 350</span><span>Heavy 600+</span></div>
+        <p id="shopTotalNote" class="text-xs font-semibold text-coral mt-2"></p>
+
+        <div class="mt-4">
+          <label class="block text-sm font-bold mb-1.5" for="shopBig">Big purchases (THB) — one-offs <span class="text-ink/40 font-normal">(gold, watch, electronics, custom suit…)</span></label>
+          <input id="shopBig" type="number" min="0" value="0" class="field text-lg">
+          <p class="text-xs text-ink/40 mt-1">A single lump sum added to your shopping total — separate from the daily sundries above.</p>
+        </div>
+
+        <p class="text-xs text-ink/50 mt-3">Uncle Pong's tip: 7-Eleven is your best mate — water, toothpaste, sunscreen, cold towels, all cheap. Get laundry done by weight at a local shop (~40–60 baht/kg), not the hotel. Haggle politely at the markets; a smile and walking away knocks the price down fast. 😎</p>
+        <!-- USER IMAGE: sundries.jpg - Uncle Pong outside a 7-Eleven with soi dogs -->
+        <img loading="lazy" decoding="async" src="sundries.jpg" alt="Uncle Pong outside a Thai 7-Eleven with the resident soi dogs" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="832" height="1248" />
+      </div>
+    </section>
+
+    <!-- ── STEP 8: GOING OUT ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🍺 Going out</h2>
+        <p class="text-ink/55 mb-5">Bars, clubs, live music, a boat party, a Muay Thai night. The fun stuff — let's budget it so the last night doesn't bankrupt you.</p>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nlNights">Nights per week you'll go out</label>
+            <input id="nlNights" type="number" min="0" max="7" value="3" class="field">
+            <p class="text-xs text-ink/40 mt-1">I'll scale this across your trip length.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nlDrinks">Drinks per night (you)</label>
+            <input id="nlDrinks" type="number" min="0" value="5" class="field">
+          </div>
+        </div>
+
+        <p class="text-sm font-bold mb-2">Your scene (sets drink prices)</p>
+        <div id="sceneGrid" class="grid sm:grid-cols-3 gap-3 mb-4"></div>
+
+        <label class="block text-sm font-bold mb-1.5" for="drinkPrice">Avg price per drink (THB) — <span id="drinkPriceLbl" class="text-coral">150</span></label>
+        <input id="drinkPrice" type="range" min="60" max="400" step="10" value="150" class="w-full">
+        <div class="flex justify-between text-xs text-ink/40 mt-1 mb-4"><span>Soi Buakhao 70-120</span><span>Beer bar 120-180</span><span>Walking St 180-300</span></div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nlCoverNights">Lady drinks per night</label>
+            <input id="nlCoverNights" type="number" min="0" value="0" class="field">
+            <p class="text-xs text-ink/40 mt-1">Buying drinks for company in go-go / beer bars — ~280–320 THB each.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nlExtras">Extras: shows, boat party, Muay Thai (THB total)</label>
+            <input id="nlExtras" type="number" min="0" value="0" class="field">
+            <p class="text-xs text-ink/40 mt-1">Boat party ~1,500 · Muay Thai ~1,000 · cabaret ~800.</p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="nlMassages">Massages per week</label>
+            <input id="nlMassages" type="number" min="0" max="21" value="0" class="field">
+            <p class="text-xs text-ink/40 mt-1">I'll scale this across your trip length.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1.5" for="massagePrice">Massage price (THB) — <span id="massagePriceLbl" class="text-coral">300</span></label>
+            <input id="massagePrice" type="range" min="150" max="1500" step="50" value="300" class="w-full">
+            <div class="flex justify-between text-xs text-ink/40 mt-1"><span>Street 150-250</span><span>Oil 300-500</span><span>Spa 800-1,500</span></div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-bold mb-1.5" for="nlMisc">Other discretionary spending (THB per day)</label>
+          <input id="nlMisc" type="number" min="0" value="0" class="field">
+          <p class="text-xs text-ink/40 mt-1">Catch-all for any extra daily spending not covered above</p>
+        </div>
+
+        <div id="nlTotalNote" class="rounded-2xl border border-aqua/25 bg-aqua/5 p-3.5 mb-4 text-sm"></div>
+
+        <div class="rounded-2xl border border-coral/30 bg-coral/5 p-4">
+          <p class="text-sm text-ink/75"><b class="text-coral">Uncle Pong says:</b> going full Walking Street mode? Respect. Just budget it properly so you don't get a nasty surprise on the last night. Soi Buakhao happy hours (55-70 baht beers) are where the locals stretch their baht — pace yourself, drink water, and tip the staff who look after you.</p>
+        </div>
+
+        <!-- USER IMAGE: entertainmentshocker.jpg - the bar-bill shocker -->
+        <img loading="lazy" decoding="async" src="entertainmentshocker.jpg" alt="The 'Financial Forensics' bar-bill shocker — how a fun night quietly adds up" class="w-full max-w-xs mx-auto rounded-2xl mt-5 shadow-card" width="640" height="960" />
+      </div>
+    </section>
+
+    <!-- ── STEP 9: BUFFER + VERDICT ── -->
+    <section data-step class="step step-hidden">
+      <div class="card p-5 sm:p-8 fade-up">
+        <h2 class="font-display font-black text-2xl sm:text-3xl mb-1">🎯 Buffer & the verdict</h2>
+        <p class="text-ink/55 mb-5">Always pad the budget. Late-night taxis, hangover pad thai, a round you didn't plan. Then here's your full breakdown.</p>
+
+        <label class="block text-sm font-bold mb-1.5" for="buffer">Safety buffer (THB) — <span id="bufferLbl" class="text-coral">2000</span></label>
+        <input id="buffer" type="range" min="0" max="15000" step="250" value="2000" class="w-full">
+        <div class="flex justify-between text-xs text-ink/40 mt-1 mb-6"><span>Tight 0</span><span>Sensible ~2,000</span><span>Comfy 6,000+</span></div>
+
+        <!-- grand total banner -->
+        <div class="rounded-2xl bg-gradient-to-br from-tealdeep to-aqua px-6 py-5 text-white mb-5 text-center shadow-lift">
+          <p class="text-[11px] uppercase tracking-[.18em] text-white/70 font-bold">Your trip total <span id="stickyName"></span></p>
+          <p class="text-4xl sm:text-5xl font-black leading-tight mt-1" id="grandCur" aria-live="polite">$0</p>
+          <p class="text-lg font-bold text-ambery" id="grandTHB">฿0</p>
+          <p class="text-[11px] text-white/60 mt-1" id="grandMeta"></p>
+        </div>
+
+        <div id="partyLevel" class="rounded-2xl border border-ambery/40 bg-gradient-to-br from-ambery/10 to-coral/5 p-5 mb-6 text-center"></div>
+
+        <div class="grid sm:grid-cols-2 gap-6 items-center">
+          <div class="relative max-w-[260px] mx-auto w-full"><canvas id="pie" height="240" role="img" aria-label="Cost breakdown chart"></canvas></div>
+          <div id="breakdownList" class="space-y-0.5 text-sm"></div>
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-aqua/30 bg-aqua/5 p-4">
+          <p class="font-bold text-tealdeep text-sm mb-1">🎚️ "What if" — extra nights on the trip</p>
+          <p class="text-xs text-ink/55 mb-2">Stretch your trip and watch every cost (except airfare, proof of funds &amp; buffer) move: <span id="whatIfLbl" class="text-coral font-bold">0 extra nights</span></p>
+          <input id="whatIf" type="range" min="0" max="10" step="1" value="0" class="w-full">
+        </div>
+
+        <div id="recs" class="mt-6 space-y-2"></div>
+
+        <div class="grid sm:grid-cols-3 gap-3 mt-6 no-print">
+          <button onclick="exportPDF()" class="btn-cta px-4 py-3 rounded-xl">📄 Export PDF</button>
+          <button id="saveBtn" onclick="saveProgress(true)" class="btn-teal px-4 py-3 rounded-xl">💾 Save estimate</button>
+          <button onclick="shareBoys()" class="btn-ghost px-4 py-3 rounded-xl">📣 Share with the boys</button>
+        </div>
+        <p id="shareMsg" class="text-center text-sm font-bold text-tealdeep mt-3 h-5" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ==================== SIDE RAILS + LEADERBOARD (budget builder; in side gutters just above the running total, scroll with page, not fixed) ==================== -->
+    <style>
+      .wz-rail-anchor{ position:relative; }
+      .wz-rail{ display:none; }
+      @media (min-width:1120px){
+        .wz-rail{ display:block; position:absolute; bottom:0; width:160px; height:300px; z-index:20; }
+        .wz-rail.wz-left{  right:calc(50% + 392px); }
+        .wz-rail.wz-right{ left:calc(50% + 392px); }
+      }
+    </style>
+    
+      
+
+      <!-- Center leaderboard 728x90 -->
+      <section class="no-print w-full" aria-label="Advertisement">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+          <p class="text-center text-[10px] uppercase tracking-[0.2em] text-ink/30 mb-3">Advertisement</p>
+          <div class="flex justify-center overflow-x-auto">
+            <div class="shrink-0" style="width:728px;height:90px">
+              <script type="text/javascript">
+                atOptions = { 'key' : '6bf56727ac0e1458327e400fcbe88d85', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+              </script>
+              <script type="text/javascript" src="https://www.highperformanceformat.com/6bf56727ac0e1458327e400fcbe88d85/invoke.js"></script>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- sticky live running total -->
+  <div class="fixed bottom-0 inset-x-0 z-40" style="background:var(--glass); backdrop-filter:blur(12px); border-top:1.5px solid var(--glass-border); box-shadow:0 -8px 30px -12px rgba(0,0,0,.35)">
+    <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+      <div>
+        <p class="text-[10px] uppercase tracking-widest text-ink/50 font-bold">Running total</p>
+        <p class="text-2xl sm:text-3xl font-black text-tealdeep leading-none"><span id="stickyCur">$0</span></p>
+      </div>
+      <div class="text-right">
+        <p class="text-[10px] text-ink/40 font-bold">in baht</p>
+        <p class="text-base sm:text-lg font-black text-coral" id="stickyTHB">฿0</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#wizardView -->
+
+<!-- hidden professional print/PDF layout -->
+<div id="printArea" class="max-w-3xl mx-auto p-8"></div>
+
+<!-- ══════════════════ COOKIE BANNER (both views) ══════════════════ -->
+<div id="cookieBanner" class="no-print fixed bottom-20 inset-x-3 sm:inset-x-auto sm:right-4 sm:max-w-sm z-50 card p-4 hidden pop-in">
+  <p class="text-sm text-ink/75">🍪 We use local storage to save your estimate on this device, plus Adsterra cookies to show ads. Manage your choices any time. <a href="/cookies" class="text-tealdeep underline font-semibold">Details</a></p>
+  <div class="flex gap-2 mt-3">
+    <button onclick="openCookieModal()" class="flex-1 btn-ghost px-3 py-2 rounded-xl text-sm">Customize</button>
+    <button onclick="cookieAcceptAll()" class="flex-1 btn-teal px-3 py-2 rounded-xl text-sm">Accept all</button>
+  </div>
+</div>
+
+<!-- ══════════════════ COOKIE PREFERENCES MODAL ══════════════════ -->
+<div id="cookieModal" class="no-print fixed inset-0 z-[60] hidden items-center justify-center p-4" style="background:rgba(15,61,57,.55)" onclick="if(event.target===this)closeCookieModal()" role="dialog" aria-modal="true" aria-label="Cookie preferences">
+  <div class="card max-w-lg w-full p-6 pop-in" style="max-height:90vh;overflow-y:auto">
+    <div class="flex items-start justify-between gap-3 mb-1">
+      <h2 class="text-2xl font-black font-display">🍪 Cookie preferences</h2>
+      <button onclick="closeCookieModal()" aria-label="Close" class="text-ink/40 hover:text-ink text-xl leading-none">✕</button>
+    </div>
+    <p class="text-sm text-ink/60 mb-4">We use strictly-necessary local storage to run the estimator, and Adsterra to display ads, which may set advertising cookies. Use the switches below to control optional analytics and ad personalisation.</p>
+    <div class="space-y-3">
+      <label class="flex items-start justify-between gap-3 rounded-2xl border border-ink/10 bg-sand/60 p-3.5">
+        <span class="text-sm"><b>Strictly necessary</b> <span class="text-[10px] bg-ambery/30 text-amber-700 px-2 py-0.5 rounded-full font-bold">always on</span><br><span class="text-xs text-ink/50">Saves your in-progress estimate and remembers your cookie choice — on this device only, never sent to a server.</span></span>
+        <input type="checkbox" checked disabled class="w-5 h-5 mt-1 shrink-0">
+      </label>
+      <label class="flex items-start justify-between gap-3 rounded-2xl border border-ink/10 bg-white p-3.5 cursor-pointer hover:border-aqua/60">
+        <span class="text-sm"><b>Analytics</b><br><span class="text-xs text-ink/50">Anonymous usage stats to improve the tool. Not currently used.</span></span>
+        <input type="checkbox" id="pref_analytics" class="w-5 h-5 mt-1 shrink-0">
+      </label>
+      <label class="flex items-start justify-between gap-3 rounded-2xl border border-ink/10 bg-white p-3.5 cursor-pointer hover:border-aqua/60">
+        <span class="text-sm"><b>Advertising / marketing</b><br><span class="text-xs text-ink/50">Lets Adsterra personalise the ads you see. Turn off for non-personalised ads.</span></span>
+        <input type="checkbox" id="pref_ads" class="w-5 h-5 mt-1 shrink-0">
+      </label>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-2 mt-5">
+      <button onclick="cookieRejectAll()" class="btn-ghost px-3 py-2.5 rounded-xl text-sm">Reject all</button>
+      <button onclick="cookieSavePrefs()" class="btn-ghost px-3 py-2.5 rounded-xl text-sm !border-aqua/50 text-tealdeep">Save choices</button>
+      <button onclick="cookieAcceptAll()" class="btn-teal px-3 py-2.5 rounded-xl text-sm">Accept all</button>
+    </div>
+    <p class="text-xs text-ink/40 mt-3 text-center">Read our <a href="/cookies" class="text-tealdeep underline">Cookie Policy</a> and <a href="/privacy" class="text-tealdeep underline">Privacy Policy</a>.</p>
+  </div>
+</div>
+
+<style>
+  .step-hidden{ display:none; }
+</style>
+<script>
+//=================== DATA (UNCHANGED — this is the pricing engine) ===================
+const RATES = { USD:36, EUR:39, GBP:46, AUD:24, CAD:26, CHF:40, JPY:0.24, CNY:5.0, HKD:4.6, SGD:27, KRW:0.026, MYR:7.7, INR:0.43, RUB:0.40, THB:1 };
+const SYM   = { USD:'$', EUR:'€', GBP:'£', AUD:'A$', CAD:'C$', CHF:'CHF ', JPY:'¥', CNY:'CN¥', HKD:'HK$', SGD:'S$', KRW:'₩', MYR:'RM ', INR:'₹', RUB:'₽', THB:'฿' };
+const STEPS = ['Trip basics','Getting there','Entry checklist','Insurance','Where you\'ll crash','Eating well','Getting around','Shopping','Going out','The verdict'];
+
+// destination price multipliers (Khon Kaen = cheapest baseline)
+const DEST = {
+  khonkaen:{name:'Khon Kaen', mult:1.00},
+  chiangmai:{name:'Chiang Mai', mult:1.08},
+  huahin:{name:'Hua Hin', mult:1.10},
+  pattaya:{name:'Pattaya', mult:1.10},
+  bangkok:{name:'Bangkok', mult:1.15},
+  multi:{name:'Multiple cities', mult:1.20},
+  phuket:{name:'Phuket', mult:1.25},
+};
+
+const AREAS = [
+  {id:'jomtien', name:'Jomtien', tag:'Best value · beach & pool life', mult:0.85, note:'Quieter, cheaper, great pools. ~15 min from the action.'},
+  {id:'central', name:'Central / Soi Buakhao / LK Metro', tag:'Best balance', mult:1.0, note:'Walkable, lively, mid-priced. Most people\'s sweet spot.'},
+  {id:'walking', name:'Walking Street / Beach Rd', tag:'Most expensive · max nightlife', mult:1.25, note:'Right in the thick of it — you pay for the location.'},
+  {id:'naklua', name:'Naklua (north)', tag:'Quieter, local', mult:0.95, note:'Calmer, more Thai, good seafood. A bit removed.'},
+  {id:'later', name:'Decide later / custom', tag:'I\'ll set my own rate', mult:1.0, note:'Pop your own nightly rate below.'},
+];
+const TIERS = [
+  {id:'hostel', name:'Hostel / guesthouse', base:550, range:'300–800'},
+  {id:'three', name:'3-star mid-range', base:1300, range:'800–2,000', popular:true},
+  {id:'four', name:'4-star', base:2400, range:'1,500–3,500'},
+  {id:'five', name:'5-star resort', base:5000, range:'3,000–8,000+'},
+  {id:'condo', name:'Condo / apartment', base:1100, range:'great for long stays'},
+];
+const FOODSTYLE = [
+  {id:'street', name:'🍢 Mostly street', perDay:450},
+  {id:'mid', name:'🍽️ Mid-range Thai', perDay:900, popular:true},
+  {id:'west', name:'🥩 Western / upscale', perDay:1600},
+];
+const AIRPORT = [
+  {id:'bus', name:'🚌 Public bus', cost:340, sub:'~170/way'},
+  {id:'taxi', name:'🚖 Private taxi', cost:2600, sub:'~1,300/way', popular:true},
+  {id:'van', name:'🚐 Shared van / Grab', cost:1400, sub:'~700/way'},
+];
+const DAILYTRANS = [
+  {id:'bus', name:'🛻 Baht bus', perDay:60},
+  {id:'app', name:'📱 Bolt / Grab', perDay:250, popular:true},
+  {id:'scoot', name:'🛵 Scooter rental', perDay:350, sub:'+fuel'},
+];
+const SHOP = [
+  {id:'light', name:'😇 Light', perDay:200},
+  {id:'normal', name:'🙂 Normal', perDay:350, popular:true},
+  {id:'heavy', name:'🤑 Heavy', perDay:600},
+];
+const SCENE = [
+  {id:'buakhao', name:'Soi Buakhao', price:100},
+  {id:'beerbar', name:'Beer bars / mix', price:150, popular:true},
+  {id:'walking', name:'Walking Street', price:240},
+];
+
+//=================== STATE ===================
+let cur = 0;
+let chart = null;
+const $ = id => document.getElementById(id);
+const num = v => { const n = parseFloat(v); return isNaN(n)?0:n; };
+
+const DEFAULT_SEL = { area:'central', tier:'three', food:'mid', airport:'taxi', daily:'app', shop:'normal', scene:'beerbar', ins:1 };
+let sel = Object.assign({}, DEFAULT_SEL);
+
+//=================== BUILD OPTION GRIDS ===================
+const TIER_ICON = { hostel:'🎒', three:'🏨', four:'✨', five:'🌺', condo:'🏢' };
+function optCard(o, onclick){
+  const pop = o.popular ? `<span class="text-[10px] bg-ambery/25 text-amber-700 font-bold px-2 py-0.5 rounded-full ml-1">popular</span>`:'';
+  const icon = TIER_ICON[o.id] ? TIER_ICON[o.id]+' ' : '';
+  return `<button type="button" class="opt text-left p-3.5" data-opt="${o.id}" onclick="${onclick}('${o.id}')" aria-pressed="false">
+    <div class="flex items-start justify-between gap-2">
+      <div class="font-bold text-sm">${icon}${o.name}${pop}</div>
+      <span class="opt-check" aria-hidden="true">✓</span>
+    </div>
+    ${o.tag?`<div class="text-xs text-tealdeep font-semibold mt-0.5">${o.tag}</div>`:''}
+    ${o.range?`<div class="text-xs text-ink/50 mt-0.5">${o.range} THB</div>`:''}
+    ${o.sub?`<div class="text-xs text-ink/50 mt-0.5">${o.sub}</div>`:''}
+    ${o.perDay?`<div class="text-xs text-coral font-bold mt-0.5">~${o.perDay.toLocaleString()} THB/day</div>`:''}
+    ${o.note?`<div class="text-[11px] text-ink/40 mt-1">${o.note}</div>`:''}
+  </button>`;
+}
+$('tierGrid').innerHTML = TIERS.map(o=>optCard(o,'pickTier')).join('');
+$('foodGrid').innerHTML = FOODSTYLE.map(o=>optCard(o,'pickFood')).join('');
+$('airportGrid').innerHTML = AIRPORT.map(o=>optCard(o,'pickAirport')).join('');
+$('dailyTransGrid').innerHTML = DAILYTRANS.map(o=>optCard(o,'pickDaily')).join('');
+$('shopGrid').innerHTML = SHOP.map(o=>optCard(o,'pickShop')).join('');
+$('sceneGrid').innerHTML = SCENE.map(o=>optCard(o,'pickScene')).join('');
+
+function markSel(gridId, id){
+  document.querySelectorAll(`#${gridId} .opt`).forEach(e=>{
+    const on = e.dataset.opt===id;
+    e.classList.toggle('sel', on);
+    e.setAttribute('aria-pressed', on?'true':'false');
+  });
+}
+function pickArea(id){ sel.area=id; markSel('areaGrid',id); applyAccom(); recalc(); }
+function pickTier(id){ sel.tier=id; markSel('tierGrid',id); applyAccom(); recalc(); }
+function applyAccom(){
+  const t = TIERS.find(x=>x.id===sel.tier);
+  if(t) $('accomNight').value = t.base;
+  recalc();
+}
+function pickFood(id){ sel.food=id; markSel('foodGrid',id); const f=FOODSTYLE.find(x=>x.id===id); $('foodPerDay').value=f.perDay; $('foodPerDayLbl').textContent=f.perDay.toLocaleString(); recalc(); }
+function pickAirport(id){ sel.airport=id; markSel('airportGrid',id); recalc(); }
+function pickDaily(id){ sel.daily=id; markSel('dailyTransGrid',id); const d=DAILYTRANS.find(x=>x.id===id); $('transPerDay').value=d.perDay; $('transPerDayLbl').textContent=d.perDay.toLocaleString(); recalc(); }
+function pickShop(id){ sel.shop=id; markSel('shopGrid',id); const s=SHOP.find(x=>x.id===id); $('shopPerDay').value=s.perDay; $('shopPerDayLbl').textContent=s.perDay.toLocaleString(); recalc(); }
+function pickScene(id){ sel.scene=id; markSel('sceneGrid',id); const s=SCENE.find(x=>x.id===id); $('drinkPrice').value=s.price; $('drinkPriceLbl').textContent=s.price.toLocaleString(); recalc(); }
+
+function setIns(v){
+  sel.ins = +v;
+  document.querySelectorAll('.ins-toggle').forEach(x=>{
+    const on = +x.dataset.ins===sel.ins;
+    x.classList.toggle('sel', on);
+    x.setAttribute('aria-pressed', on?'true':'false');
+  });
+  $('insBox').style.display = sel.ins? 'block':'none';
+  recalc();
+}
+document.querySelectorAll('.ins-toggle').forEach(b=>b.addEventListener('click',()=>setIns(b.dataset.ins)));
+
+//=================== SEASON / WEATHER / PACKING ===================
+const MONTH_TEMP = [
+  {hi:31,lo:22},{hi:32,lo:23},{hi:33,lo:25},{hi:34,lo:26},{hi:33,lo:26},{hi:32,lo:26},
+  {hi:32,lo:26},{hi:32,lo:26},{hi:31,lo:25},{hi:31,lo:25},{hi:31,lo:24},{hi:30,lo:22}
+];
+const cToF = c => Math.round(c*9/5+32);
+function seasonFor(m){
+  if([10,11,0,1].includes(m)) return {name:'High Season',emoji:'☀️',accent:'#D97706',
+    blurb:'Peak time — dry, sunny, the best weather of the year. Also the busiest and priciest, so book rooms and flights early.',
+    vibe:'Bright sun all day, pleasantly cooler evenings (by Thai standards). Pack for sun, not rain.'};
+  if([2,3,4].includes(m)) return {name:'Hot Season',emoji:'🔥',accent:'#EA580C',
+    blurb:'Properly hot and humid — April is the furnace, and mid-April is Songkran (citywide water-fight chaos, expect to get soaked in the street). Fewer crowds than peak, decent deals.',
+    vibe:'Brutal midday heat — that is what the pool is for. Hydrate like it is your job.'};
+  return {name:'Low / Green Season',emoji:'🌧️',accent:'#0F766E',
+    blurb:'Monsoon months — short, heavy downpours (usually afternoon), then the sun pops back out. Upside: cheapest rooms and the fewest tourists all year. Sept–Oct is the wettest.',
+    vibe:'Rain comes in bursts, not all day. Grab a cheap umbrella (every 7-Eleven sells them) and a waterproof phone pouch and you are sorted.'};
+}
+function buyRow(item, where, notes){
+  return `<tr>
+    <td class="py-2 pr-3 border-t border-ink/10 font-semibold">${item}</td>
+    <td class="py-2 pr-3 border-t border-ink/10 text-ink/60">${where}</td>
+    <td class="py-2 border-t border-ink/10 text-ink/50">${notes}</td>
+  </tr>`;
+}
+function renderSeason(d){
+  const card=$('seasonCard'); if(!card || isNaN(d)) return;
+  const m=d.getMonth(); const t=MONTH_TEMP[m]; const s=seasonFor(m);
+  const monthName=d.toLocaleString('en-US',{month:'long'});
+  const seasonBring = s.name.startsWith('High')
+    ? 'Bonus for this season: a light layer for fierce hotel A/C and breezy evenings.'
+    : s.name.startsWith('Hot')
+    ? 'Bonus for this season: extra sunscreen and a cap — the heat is no joke.'
+    : 'Bonus for this season: a small umbrella and a waterproof phone pouch for the downpours.';
+  card.innerHTML = `
+    <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
+      <h3 class="text-xl sm:text-2xl font-black">${s.emoji} You're visiting in <span style="color:${s.accent}">${monthName}</span></h3>
+      <span class="text-xs font-bold px-3 py-1.5 rounded-full" style="background:${s.accent}1a;color:${s.accent};border:1px solid ${s.accent}55">${s.name}</span>
+    </div>
+    <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="rounded-2xl bg-sand/70 border border-ink/5 p-4 text-center">
+        <p class="text-[11px] uppercase tracking-widest text-ink/45 font-bold">Daytime high</p>
+        <p class="text-2xl font-black" style="color:${s.accent}">${t.hi}°C</p>
+        <p class="text-sm text-ink/50">${cToF(t.hi)}°F</p>
+      </div>
+      <div class="rounded-2xl bg-sand/70 border border-ink/5 p-4 text-center">
+        <p class="text-[11px] uppercase tracking-widest text-ink/45 font-bold">Night low</p>
+        <p class="text-2xl font-black" style="color:${s.accent}">${t.lo}°C</p>
+        <p class="text-sm text-ink/50">${cToF(t.lo)}°F</p>
+      </div>
+      <div class="rounded-2xl bg-sand/70 border border-ink/5 p-4 text-center">
+        <p class="text-[11px] uppercase tracking-widest text-ink/45 font-bold">Sea temp</p>
+        <p class="text-2xl font-black" style="color:${s.accent}">~29°C</p>
+        <p class="text-sm text-ink/50">bath-warm 🌊</p>
+      </div>
+    </div>
+    <p class="text-sm text-ink/70 mb-2">${s.blurb}</p>
+    <p class="text-sm font-semibold text-coral mb-5">Uncle Pong's read: ${s.vibe} ${seasonBring}</p>
+
+    <div class="space-y-4">
+      <div class="rounded-2xl border border-ambery/50 bg-ambery/10 p-4">
+        <p class="font-bold text-amber-700 mb-2">💵 Cash — bring ~20,000 THB worth</p>
+        <ul class="text-sm text-ink/75 space-y-1.5 list-disc pl-4">
+          <li>Carry <b>20,000 THB per person</b> in cash (or foreign equivalent). Immigration officers are actively checking in 2026 — a balance on your phone won't cut it.</li>
+          <li>Bring <b>large denominations</b> ($100 / €100 / £50 notes) — they get a noticeably better exchange rate than small, worn bills.</li>
+          <li><b>Best rates in the whole country</b> are the money changers in the airport basement. Go to <b>SuperRich on Level B</b> at Suvarnabhumi (two floors below arrivals, next to the Airport Rail Link) and change the bulk of your cash there.</li>
+          <li>Change <b>just enough for the driver or bus first</b> (~1,500–2,000 THB) so you're not stuck — they want baht on arrival, not your card.</li>
+          <li><b>ATMs work</b> but every foreign-card withdrawal adds a <b>220 THB fee</b> on top of your own bank's charges. Pull <b>large amounts (10,000–20,000 THB)</b> at a time to avoid repeat trips and repeat fees.</li>
+          <li>In Thailand, change the rest at the better booths — <b>SuperRich</b> and <b>TT Exchange</b> at the major malls usually give the best rates.</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-emerald-300 bg-emerald-50 p-4">
+        <p class="font-bold text-emerald-700 mb-2">✅ Bring this — the stuff you can't easily replace</p>
+        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1 text-sm text-ink/75">
+          <ul class="list-disc pl-4 space-y-1">
+            <li>Passport (valid 6+ months)</li>
+            <li>Credit/debit cards + the cash above</li>
+            <li>Phone, charger & a power bank</li>
+            <li>Flight & hotel bookings saved offline</li>
+            <li>Daily prescription meds (original packaging)</li>
+            <li>Universal power adapter</li>
+            <li>Sunglasses & a hat/cap</li>
+            <li>Deodorant</li>
+          </ul>
+          <ul class="list-disc pl-4 space-y-1">
+            <li>Shorts (skip the pile of t-shirts — dirt cheap here)</li>
+            <li>2 nicer outfits for going out to finer establishments</li>
+            <li>Swimwear</li>
+            <li>Purse, slim wallet or a small man-bag</li>
+            <li>Comfortable walking shoes + flip-flops/sandals</li>
+            <li>Light rain jacket or small umbrella</li>
+          </ul>
+        </div>
+        <p class="text-xs font-semibold text-amber-700 mt-2">Pack LIGHT, khun — people always haul over twice what they wear. Leave room in the bag for what you buy here.</p>
+      </div>
+
+      <div class="rounded-2xl border border-ink/10 bg-sand/60 p-3 text-center">
+        <!-- USER IMAGE: falangStarterPack.jpg - the cautionary 'Old Angry Falang Starter Pack' meme in the packing card -->
+        <img loading="lazy" decoding="async" src="falangStarterPack.jpg" alt="The Old Angry Falang Final Boss Starter Pack — a cautionary tale" class="w-full max-w-sm mx-auto rounded-xl" width="1122" height="1402" />
+        <p class="text-xs text-ink/45 mt-2">Pack like a legend — don't end up the Old Angry Falang. 😄</p>
+      </div>
+
+      <div class="rounded-2xl border border-coral/40 bg-coral/5 p-4">
+        <p class="font-bold text-coral mb-2">🚫 Leave at home — some of this is illegal here</p>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-1 text-sm text-ink/75 list-disc pl-4">
+          <li><b>Vapes / e-cigarettes</b> — illegal, X-rayed and confiscated at the airport, fines up to 30,000 THB</li>
+          <li>Any illegal drugs or substances — penalties are severe</li>
+          <li>Too many clothes (you'll shop here)</li>
+          <li>Heavy jeans / thick clothing</li>
+          <li>Expensive jewelry or watches</li>
+          <li>Big bulky luggage</li>
+          <li>Winter clothes</li>
+          <li>Strong cologne</li>
+          <li>Pornography (technically illegal to import)</li>
+          <li>Sex toys (illegal to import — customs treats them as obscene goods)</li>
+          <li>Drones (illegal without registration — routinely confiscated)</li>
+          <li>Weapons or self-defense items</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-aqua/30 bg-aqua/5 p-4">
+        <p class="font-bold text-tealdeep mb-2">🛒 Don't pack it — buy it cheap when you land</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead><tr class="text-left text-ink/45 text-xs uppercase tracking-wide">
+              <th class="py-1 pr-3">Item</th><th class="py-1 pr-3">Where to buy</th><th class="py-1">Notes</th>
+            </tr></thead>
+            <tbody>
+              ${buyRow('Sunscreen','7-Eleven, Boots, Watson\'s, pharmacies','Widely available & cheap')}
+              ${buyRow('Mosquito repellent','7-Eleven, Boots, Watson\'s','Effective options everywhere')}
+              ${buyRow('Condoms & lube','7-Eleven, Boots, Watson\'s, pharmacies','Many brands & sizes')}
+              ${buyRow('Toiletries','7-Eleven, Boots, Big C, Lotus\'s','Toothpaste, shampoo, razor — all of it')}
+              ${buyRow('Basic medications','Boots, Watson\'s, pharmacies','Painkillers, antihistamine, stomach meds')}
+              ${buyRow('Umbrella','7-Eleven, street vendors, markets','Very cheap — what locals actually use')}
+              ${buyRow('SIM card / eSIM','Airport counters, AIS / TrueMove / DTAC, 7-Eleven','Easy to get on arrival')}
+              ${buyRow('Extra clothes','Markets, Big C, Lotus\'s, malls','Cheap & good options')}
+              ${buyRow('Snacks & drinks','7-Eleven (everywhere)','Extremely convenient')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-ambery/40 bg-ambery/10 p-4 mt-4">
+      <p class="text-sm text-ink/75"><b class="text-amber-700">Bottom line:</b> pack only the essentials you can't easily replace — passport, money, phone/power, shoes, rain protection. Everything else is cheap and good quality at 7-Eleven or Boots/Watson's. Cargo shorts and sandals are basically the official farang uniform, so embrace it — just lose the vape before you fly. 🌴</p>
+    </div>`;
+  card.style.display='block';
+}
+
+//=================== DATES (UNCHANGED LOGIC) ===================
+function calcNights(){
+  const s=$('startDate').value;
+  if(s) renderSeason(new Date(s)); else if($('seasonCard')) $('seasonCard').style.display='none';
+  let days = Math.floor(num($('totalDays').value));
+  if(days>60){ days=60; $('totalDays').value=60; }
+  if(days<0) days=0;
+  const nights = days>0 ? days-1 : 0;
+  if(days>0){
+    $('nightsNote').textContent = `${days} days · ${nights} nights on the ground 🌴`;
+    if(num($('insDays').value)===0 || !$('insDays').dataset.touched) $('insDays').value = days;
+    return {nights, days};
+  }
+  $('nightsNote').textContent='Enter your total days on the ground.';
+  return {nights:0, days:0};
+}
+
+//=================== CALC (UNCHANGED — identical results guaranteed) ===================
+function getNights(){ return calcNights(); }
+
+function compute(extraNights=0){
+  const c = $('currency').value;
+  const trav = Math.max(1, num($('travelers').value));
+  const base = getNights();
+  const r = RATES[c];
+
+  // "What if" extra nights stretch the trip. They scale every per-day / per-night
+  // cost (insurance, accommodation, food, transport, shopping, going out, tips),
+  // but NOT airfare, proof of funds or buffer — and not true one-offs (airport
+  // transfer, big purchases, one-time show/boat extras).
+  const e = base.days>0 ? extraNights : 0;
+  const days = base.days + e;
+  const nights = base.nights + e;
+
+  const airfareTHB = num($('airfare').value)*r*trav;          // round trip — fixed
+  const fundsTHB = base.days>0 ? 20000*trav : 0;              // flat per person — fixed
+  const insTHB = sel.ins ? num($('insPerDay').value)*(num($('insDays').value)+e)*trav : 0;
+  const accomTHB = num($('accomNight').value)*nights;
+  const food711 = $('food711').checked ? 120 : 0;
+  const foodTHB = (num($('foodPerDay').value)+food711)*days*trav;
+  const ap = AIRPORT.find(x=>x.id===sel.airport);
+  const airportTHB = (ap && base.days>0) ? ap.cost : 0;        // one round trip — fixed
+  const transTHB = airportTHB + num($('transPerDay').value)*days;
+  const shopTHB = num($('shopPerDay').value)*days*trav + num($('shopBig').value); // big buys fixed
+
+  // nlNights = nights out PER WEEK; scaled across the (possibly stretched) trip
+  const nightsOut = Math.round(num($('nlNights').value)*(days/7));
+  const drinksTHB = nightsOut*num($('nlDrinks').value)*num($('drinkPrice').value)*trav;
+  const ladyTHB = nightsOut*num($('nlCoverNights').value)*300*trav; // lady drinks/night × ~300 THB each
+  const massagesPerTrip = Math.round(num($('nlMassages').value)*(days/7));
+  const massageTHB = massagesPerTrip*num($('massagePrice').value)*trav;
+  const extrasTHB = num($('nlExtras').value)*trav;             // one-off total — fixed
+  const miscTHB = num($('nlMisc').value)*days*trav; // user-entered catch-all, per day; not destination-scaled
+  let nightlifeTHB = drinksTHB+ladyTHB+massageTHB+extrasTHB;
+
+  const bufferTHB = num($('buffer').value)*trav;              // flat — fixed
+
+  // destination price multiplier applied to on-the-ground costs (hotel, food, transport, going out)
+  const destObj = DEST[$('dest').value] || {mult:1, name:''};
+  const dm = destObj.mult;
+  nightlifeTHB = nightlifeTHB*dm + miscTHB;
+
+  // Tips ≈ 15% of what you spend on Food, Transport, Going out and Buffer (regional-adjusted)
+  const tipsTHB = 0.15 * ((foodTHB*dm) + (transTHB*dm) + nightlifeTHB + bufferTHB);
+
+  // Additive spend categories — these sum to the grand total.
+  // Proof of funds (the 20k you must carry) is a budgeted line right after Accommodation.
+  const cats = {
+    'Airfare': airfareTHB,
+    'Insurance': insTHB,
+    'Accommodation': accomTHB*dm,
+    'Proof of funds': fundsTHB,
+    'Food': foodTHB*dm,
+    'Transport': transTHB*dm,
+    'Shopping': shopTHB,
+    'Going out': nightlifeTHB,
+    'Buffer': bufferTHB,
+    'Tips (≈15%)': tipsTHB,
+  };
+  const totalTHB = Object.values(cats).reduce((a,b)=>a+b,0);
+
+  return {cats, totalTHB, c, r, trav, nights, days, dm, nightlifeTHB, tipsTHB, fundsTHB};
+}
+
+function fmtCur(thb, c, r){
+  const v = thb/r;
+  const dec = ['INR','RUB','JPY','KRW'].includes(c) ? 0 : (v>=100?0:2);
+  return SYM[c]+v.toLocaleString(undefined,{maximumFractionDigits:dec});
+}
+function fmtTHB(thb){ return '฿'+Math.round(thb).toLocaleString(); }
+
+//=================== SMOOTH NUMBER COUNTING ===================
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateCount(el, targetTHB, fmt){
+  if(!el) return;
+  const from = el._thb ?? targetTHB;
+  el._thb = targetTHB;
+  if(reduceMotion || from===targetTHB){ el.textContent = fmt(targetTHB); return; }
+  if(el._raf) cancelAnimationFrame(el._raf);
+  const t0 = performance.now(), dur = 420;
+  const tick = now=>{
+    const p = Math.min(1,(now-t0)/dur), ease = 1-Math.pow(1-p,3);
+    el.textContent = fmt(from + (targetTHB-from)*ease);
+    if(p<1) el._raf = requestAnimationFrame(tick);
+  };
+  el._raf = requestAnimationFrame(tick);
+}
+
+//=================== RECALC ===================
+function recalc(){
+  $('insPerDayLbl').textContent = num($('insPerDay').value).toLocaleString()+' THB';
+  $('foodPerDayLbl').textContent = num($('foodPerDay').value).toLocaleString();
+  $('transPerDayLbl').textContent = num($('transPerDay').value).toLocaleString();
+  $('shopPerDayLbl').textContent = num($('shopPerDay').value).toLocaleString();
+  $('drinkPriceLbl').textContent = num($('drinkPrice').value).toLocaleString();
+  if($('massagePriceLbl')) $('massagePriceLbl').textContent = num($('massagePrice').value).toLocaleString();
+  $('bufferLbl').textContent = num($('buffer').value).toLocaleString();
+  $('curLbl1').textContent = $('currency').value;
+  if($('navCurrency') && $('navCurrency').value !== $('currency').value) $('navCurrency').value = $('currency').value;
+  $('stickyName').textContent = $('nickname').value ? '· '+$('nickname').value : '';
+
+  if($('destNote')){
+    const dObj = DEST[$('dest').value] || {mult:1,name:''};
+    const up = Math.round((dObj.mult-1)*100);
+    $('destNote').textContent = up===0
+      ? `${dObj.name}: the most affordable base — prices set to baseline.`
+      : `${dObj.name}: hotel, food, transport & going-out priced about ${up}% above the cheapest spot.`;
+  }
+
+  const {cats,totalTHB,c,r,nights,days,trav} = compute();
+  animateCount($('stickyCur'), totalTHB, v=>fmtCur(v,c,r));
+  $('stickyTHB').textContent = fmtTHB(totalTHB);
+
+  if($('fundsNote')) $('fundsNote').textContent = `You'll need to carry: 20,000 THB × ${trav} traveler${trav>1?'s':''} = ${fmtTHB(20000*trav)} (${fmtCur(20000*trav,c,r)})`;
+
+  $('accomTotalNote').textContent = nights>0
+    ? `${fmtTHB(num($('accomNight').value))}/night × ${nights} nights = ${fmtTHB(num($('accomNight').value)*nights)} (${fmtCur(num($('accomNight').value)*nights,c,r)})`
+    : 'Set your trip dates to total this up.';
+
+  // Food sub-calc: (daily budget + 7-Eleven) × days × travelers
+  if($('foodTotalNote')){
+    const food711v = $('food711').checked ? 120 : 0;
+    const foodDay = num($('foodPerDay').value);
+    const foodTot = (foodDay+food711v)*days*trav;
+    $('foodTotalNote').textContent = days>0
+      ? `${fmtTHB(foodDay)}${food711v?` + ${fmtTHB(food711v)} 7-Eleven`:''}/day × ${days} days${trav>1?` × ${trav} travelers`:''} = ${fmtTHB(foodTot)} (${fmtCur(foodTot,c,r)})`
+      : 'Set your trip dates to total this up.';
+  }
+
+  // Transport sub-calc: airport transfer + (daily transport × days)
+  if($('transTotalNote')){
+    const ap = AIRPORT.find(x=>x.id===sel.airport);
+    const apCost = (ap && days>0) ? ap.cost : 0;
+    const transDay = num($('transPerDay').value);
+    const transTot = apCost + transDay*days;
+    $('transTotalNote').textContent = days>0
+      ? `Airport transfer ${fmtTHB(apCost)} + ${fmtTHB(transDay)}/day × ${days} days = ${fmtTHB(transTot)} (${fmtCur(transTot,c,r)})`
+      : 'Set your trip dates to total this up.';
+  }
+
+  // Shopping sub-calc: (daily sundries × days × travelers) + one-off big purchases
+  if($('shopTotalNote')){
+    const shopDay = num($('shopPerDay').value);
+    const shopBig = num($('shopBig').value);
+    const daily = shopDay*days*trav;
+    const shopTot = daily + shopBig;
+    $('shopTotalNote').textContent = days>0
+      ? `${fmtTHB(shopDay)}/day × ${days} days${trav>1?` × ${trav} travelers`:''}${shopBig>0?` + ${fmtTHB(shopBig)} big purchases`:''} = ${fmtTHB(shopTot)} (${fmtCur(shopTot,c,r)})`
+      : 'Set your trip dates to total this up.';
+  }
+
+  // Going out sub-calc: itemised, mirrors the Going-out category total
+  if($('nlTotalNote')){
+    if(days>0){
+      const dm = (DEST[$('dest').value]||{mult:1}).mult;
+      const nightsOut = Math.round(num($('nlNights').value)*(days/7));
+      const massagesTrip = Math.round(num($('nlMassages').value)*(days/7));
+      const drinks  = nightsOut*num($('nlDrinks').value)*num($('drinkPrice').value)*trav*dm;
+      const lady    = nightsOut*num($('nlCoverNights').value)*300*trav*dm;
+      const massage = massagesTrip*num($('massagePrice').value)*trav*dm;
+      const extras  = num($('nlExtras').value)*trav*dm;
+      const misc    = num($('nlMisc').value)*days*trav;
+      const total   = drinks+lady+massage+extras+misc;
+      const line = (label,val,detail)=> val>0
+        ? `<div class="flex items-center justify-between gap-2 py-0.5"><span class="text-ink/60">${label}${detail?` <span class="text-ink/35">${detail}</span>`:''}</span><span class="text-ink/80 font-semibold">${fmtTHB(val)}</span></div>` : '';
+      const rows = [
+        line('Drinks', drinks, `${nightsOut} nights × ${num($('nlDrinks').value)} × ${fmtTHB(num($('drinkPrice').value))}`),
+        line('Lady drinks', lady, `${nightsOut} nights × ${num($('nlCoverNights').value)} × ฿300`),
+        line('Massages', massage, `${massagesTrip} × ${fmtTHB(num($('massagePrice').value))}`),
+        line('Extras (shows / boat / Muay Thai)', extras, ''),
+        line('Other discretionary', misc, `${fmtTHB(num($('nlMisc').value))}/day × ${days} days`),
+      ].join('');
+      $('nlTotalNote').innerHTML = (total>0 ? rows : `<div class="text-ink/50 py-0.5">Nothing budgeted for going out yet.</div>`)
+        + `<div class="flex items-center justify-between gap-2 pt-2 mt-1 border-t border-ink/10 font-bold"><span>Going out total</span><span class="text-coral">${fmtTHB(total)} (${fmtCur(total,c,r)})</span></div>`;
+    } else {
+      $('nlTotalNote').innerHTML = `<div class="text-ink/50">Set your trip dates to total this up.</div>`;
+    }
+  }
+
+  if(cur===STEPS.length-1) renderVerdict();
+  saveProgress(false);
+}
+
+//=================== VERDICT (final step) ===================
+const COLORS = ['#0F766E','#14B8A6','#F97316','#FBBF24','#8B5CF6','#10B981','#EF4444','#3B82F6','#9CA3AF','#059669'];
+function renderVerdict(){
+  const extra = num($('whatIf').value);
+  $('whatIfLbl').textContent = extra+' extra night'+(extra===1?'':'s');
+  const {cats,totalTHB,c,r,nights,days,nightlifeTHB,trav} = compute(extra);
+
+  animateCount($('grandCur'), totalTHB, v=>fmtCur(v,c,r));
+  animateCount($('grandTHB'), totalTHB, v=>fmtTHB(v));
+  $('grandMeta').textContent = days>0
+    ? `${(DEST[$('dest').value]||{name:'Thailand'}).name} · ${trav} traveler${trav>1?'s':''} · ${days} days / ${nights} nights${extra>0?` (incl. ${extra} what-if)`:''}`
+    : 'Enter your total days on step 1 to see the full picture.';
+
+  const labels=[], data=[], sliceColors=[];
+  $('breakdownList').innerHTML = Object.entries(cats).map(([k,v],i)=>{
+    if(v<=0) return '';
+    const col = COLORS[i % COLORS.length];
+    labels.push(k); data.push(Math.round(v)); sliceColors.push(col);
+    const pct = totalTHB? Math.round(v/totalTHB*100):0;
+    return `<div class="flex items-center justify-between gap-2 py-1.5 border-b border-ink/5">
+      <span class="flex items-center gap-2 text-ink/75"><span class="w-3 h-3 rounded-full shrink-0" style="background:${col}"></span>${k}</span>
+      <span class="text-right whitespace-nowrap"><b>${fmtCur(v,c,r)}</b> <span class="text-ink/40 text-xs">${pct}%</span></span>
+    </div>`;
+  }).join('') + `<div class="flex justify-between items-center pt-3 text-base"><span class="font-black">GRAND TOTAL</span><span class="font-black text-tealdeep text-lg">${fmtCur(totalTHB,c,r)}</span></div>
+  <div class="text-right text-coral font-bold text-sm">${fmtTHB(totalTHB)}</div>`;
+
+  if(data.length){
+    if(chart){
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = data;
+      chart.data.datasets[0].backgroundColor = sliceColors;
+      chart.update('none');
+    } else {
+      chart = new Chart($('pie').getContext('2d'),{type:'doughnut',
+        data:{labels,datasets:[{data,backgroundColor:sliceColors,borderColor:'#FFFFFF',borderWidth:2}]},
+        options:{plugins:{legend:{display:false}},cutout:'62%',responsive:true}});
+    }
+  } else if(chart){ chart.destroy(); chart=null; }
+
+  const lvl = nightlifeTHB<6000 ? {t:'😎 Mild Explorer', d:'Chilled trip — a few drinks, plenty of beach.', c:'text-tealdeep'}
+            : nightlifeTHB<20000 ? {t:'🦉 Solid Night Owl', d:'You\'ll see the sunrise once or twice. Balanced.', c:'text-amber-600'}
+            : {t:'👑 Full Walking Street Legend', d:'Big nights incoming. Budget locked, surprises avoided. Respect.', c:'text-coral'};
+  const lvlPrefix = nights>0 ? `${nights}-night ` : '';
+  $('partyLevel').innerHTML = `<p class="text-[10px] uppercase tracking-[.18em] text-ink/45 font-bold">Your party level</p>
+    <p class="text-2xl font-black ${lvl.c} mt-1">${lvlPrefix}${lvl.t}</p>
+    <p class="text-sm text-ink/55 mt-1">${lvl.d}</p>`;
+
+  const recs=[];
+  if(sel.area==='jomtien' && nightlifeTHB>15000) recs.push('Big nightlife spend while staying in Jomtien? Either book a few nights nearer Central/Walking St, or pad your Bolt budget for late-night rides home.');
+  if(sel.scene==='walking' && num($('nlNights').value)>2) recs.push('Walking Street drinks add up fast. Hit Soi Buakhao happy hours (55–70฿ beers) on a couple of nights to stretch the baht without missing out.');
+  if(sel.airport==='bus') recs.push('Saving on the airport bus is smart, but after a long flight a private taxi (~1,300฿) door-to-door is worth it. Your call.');
+  if(!sel.ins) recs.push('No insurance flagged — Thai private hospitals are excellent but bill in cash up front. Even basic medical cover (~180฿/day) is cheap peace of mind.');
+  if(num($('buffer').value)<1000) recs.push('Your buffer is thin. Pad it to ~2,000฿/person so a surprise round or late taxi doesn\'t throw the whole budget.');
+  if(num($('foodPerDay').value)>1400) recs.push('Splurging on food every day? Mix in street food (som tam, khao pad ~50–80฿) a few times — some of the best eating in town and saves a fortune.');
+  if(num($('nlDrinks').value)>8) recs.push('That\'s a lot of drinks a night, champ. Alternate with water, eat before you go out, and you\'ll feel human the next day.');
+  if(recs.length===0) recs.push('Solid, balanced plan. Nothing screams "budget blowout" here — you\'re set up for a great trip.');
+  const name = $('nickname').value || 'boss';
+  $('recs').innerHTML = `<p class="font-bold"><span class="text-coral">🧠 Uncle Pong's tips for you, ${name}:</span></p>` +
+    recs.map(t=>`<div class="rounded-xl border border-ink/10 bg-sand/50 p-3 text-sm text-ink/75">${t}</div>`).join('');
+}
+
+//=================== WIZARD NAV ===================
+const sections = document.querySelectorAll('[data-step]');
+let wizardOpen = false;
+let landingScrollY = 0;
+
+function renderStep(){
+  sections.forEach((s,i)=>s.classList.toggle('step-hidden', i!==cur));
+  $('progressDots').innerHTML = STEPS.map((s,i)=>
+    `<button type="button" onclick="jumpStep(${i})" title="${s}" aria-label="Go to step ${i+1}: ${s}" aria-current="${i===cur}"
+       class="flex-1 h-2 rounded-full transition ${i<cur?'bg-aqua':i===cur?'bg-coral':'bg-ink/10 hover:bg-ink/20'}"></button>`).join('');
+  $('stepLabel').textContent = `Step ${cur+1} of ${STEPS.length} · ${STEPS[cur]}`;
+  $('backBtn').disabled = cur===0;
+  $('nextBtn').textContent = cur===STEPS.length-1 ? 'Done 🎉' : 'Next →';
+  window.scrollTo({top:0,behavior: reduceMotion?'auto':'smooth'});
+  if(cur===STEPS.length-1) renderVerdict();
+}
+function jumpStep(i){ if(i>=0 && i<STEPS.length){ cur=i; renderStep(); recalc(); } }
+function go(d){
+  if(d>0 && cur===STEPS.length-1){ finishWizard(); return; }
+  const nx = cur+d;
+  if(nx<0 || nx>=STEPS.length) return;
+  cur=nx; renderStep(); recalc();
+}
+
+function openWizard(jumpToVerdict=false){
+  landingScrollY = window.scrollY;
+  $('landing').style.display='none';
+  $('wizardView').classList.remove('hidden');
+  wizardOpen = true;
+  cur = jumpToVerdict ? STEPS.length-1 : 0;
+  renderStep(); recalc();
+}
+function exitWizard(){
+  $('wizardView').classList.add('hidden');
+  $('landing').style.display='';
+  wizardOpen = false;
+  window.scrollTo({top:landingScrollY, behavior:'auto'});
+}
+function finishWizard(){
+  saveProgress(false);
+  confettiBurst($('nextBtn'));
+  setTimeout(()=>exitWizard(), reduceMotion?0:650);
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && wizardOpen) exitWizard(); });
+
+//=================== QUICK PRESETS ===================
+const PRESETS = {
+  pattaya7:{ dest:'pattaya', days:7,  tier:'three', food:'mid', airport:'taxi', daily:'app', shop:'normal', scene:'walking', nlNights:5, nlDrinks:6, nlExtras:1500, nlMassages:2, buffer:3000, ins:1, label:'Pattaya Party · 7 days' },
+  phuket10:{ dest:'phuket',  days:10, tier:'four',  food:'mid', airport:'van',  daily:'app', shop:'normal', scene:'beerbar', nlNights:2, nlDrinks:3, nlExtras:1000, nlMassages:3, buffer:2000, ins:1, label:'Phuket Relaxation · 10 days' },
+  mix14:{    dest:'multi',   days:14, tier:'three', food:'mid', airport:'van',  daily:'app', shop:'normal', scene:'beerbar', nlNights:3, nlDrinks:4, nlExtras:1000, nlMassages:2, buffer:2500, ins:1, label:'Bangkok + Beach Mix · 14 days' },
+};
+function applyPreset(id){
+  const p = PRESETS[id]; if(!p) return;
+  $('dest').value = p.dest;
+  $('totalDays').value = p.days;
+  delete $('insDays').dataset.touched; $('insDays').value = p.days;
+  pickTier(p.tier); pickFood(p.food); pickAirport(p.airport); pickDaily(p.daily); pickShop(p.shop); pickScene(p.scene);
+  $('nlNights').value = p.nlNights; $('nlDrinks').value = p.nlDrinks;
+  $('nlExtras').value = p.nlExtras; $('nlMassages').value = p.nlMassages;
+  $('buffer').value = p.buffer;
+  setIns(p.ins);
+  openWizard(true); // jump straight to the verdict — step back to tweak
+  const m=$('shareMsg'); if(m){ m.textContent = `✨ Loaded: ${p.label} — step back to tweak anything.`; setTimeout(()=>m.textContent='',4000); }
+}
+
+//=================== CONFETTI (save celebration) ===================
+function confettiBurst(fromEl){
+  if(reduceMotion) return;
+  const rect = (fromEl||document.body).getBoundingClientRect();
+  const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+  const colors = ['#0F766E','#14B8A6','#F97316','#FBBF24','#EF4444'];
+  for(let i=0;i<22;i++){
+    const b = document.createElement('div');
+    b.className='confetti-bit';
+    b.style.left = cx+'px'; b.style.top = cy+'px';
+    b.style.background = colors[i%colors.length];
+    b.style.setProperty('--cx', (Math.random()*240-120)+'px');
+    b.style.setProperty('--cy', (-(Math.random()*160)-40)+'px');
+    b.style.setProperty('--cr', (Math.random()*540-270)+'deg');
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(), 1000);
+  }
+}
+
+//=================== PERSISTENCE (same key & shape as V1 — old saves still load) ===================
+const KEY='somchai_pattaya_v1';
+function saveProgress(announce){
+  const data={
+    nickname:$('nickname').value, travelers:$('travelers').value, currency:$('currency').value, dest:$('dest').value,
+    startDate:$('startDate').value, totalDays:$('totalDays').value, airfare:$('airfare').value,
+    ck:['ck_tdac','ck_passport','ck_visa','ck_onward','ck_booking','ck_funds'].map(i=>$(i).checked),
+    insDays:$('insDays').value, insPerDay:$('insPerDay').value,
+    accomNight:$('accomNight').value, foodMeals:$('foodMeals').value, food711:$('food711').checked, foodPerDay:$('foodPerDay').value,
+    transPerDay:$('transPerDay').value, shopPerDay:$('shopPerDay').value, shopBig:$('shopBig').value,
+    nlNights:$('nlNights').value, nlDrinks:$('nlDrinks').value, drinkPrice:$('drinkPrice').value,
+    nlCoverNights:$('nlCoverNights').value, nlMassages:$('nlMassages').value, massagePrice:$('massagePrice').value,
+    nlExtras:$('nlExtras').value, nlMisc:$('nlMisc').value, buffer:$('buffer').value,
+    sel
+  };
+  try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){}
+  if(announce){
+    const m=$('shareMsg'); if(m){m.textContent='✅ Saved to this device.'; setTimeout(()=>m.textContent='',2500);}
+    confettiBurst($('saveBtn'));
+  }
+}
+function loadProgress(){
+  let d; try{ d=JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  if(!d) return;
+  const set=(id,v,chk)=>{ if($(id)!=null && v!=null){ if(chk)$(id).checked=v; else $(id).value=v; } };
+  set('nickname',d.nickname); set('travelers',d.travelers); set('currency',d.currency); set('dest',d.dest);
+  set('startDate',d.startDate); set('totalDays',d.totalDays); set('airfare',d.airfare);
+  if(d.ck){['ck_tdac','ck_passport','ck_visa','ck_onward','ck_booking','ck_funds'].forEach((i,n)=>set(i,d.ck[n],true));}
+  set('insDays',d.insDays); set('insPerDay',d.insPerDay);
+  set('accomNight',d.accomNight); set('foodMeals',d.foodMeals); set('food711',d.food711,true); set('foodPerDay',d.foodPerDay);
+  set('transPerDay',d.transPerDay); set('shopPerDay',d.shopPerDay); set('shopBig',d.shopBig);
+  set('nlNights',d.nlNights); set('nlDrinks',d.nlDrinks); set('drinkPrice',d.drinkPrice);
+  set('nlCoverNights',d.nlCoverNights); set('nlMassages',d.nlMassages); set('massagePrice',d.massagePrice);
+  set('nlExtras',d.nlExtras); set('nlMisc',d.nlMisc); set('buffer',d.buffer);
+  if(d.sel) sel=Object.assign({}, DEFAULT_SEL, d.sel);
+}
+function resetAll(){
+  if(!confirm('Clear everything and start fresh from zero?')) return;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  // blank every input to a true zero state
+  $('nickname').value=''; $('travelers').value=1; $('dest').value='pattaya'; $('startDate').value=''; $('totalDays').value=''; $('airfare').value=0;
+  ['ck_tdac','ck_passport','ck_visa','ck_onward','ck_booking','ck_funds','food711'].forEach(i=>$(i).checked=false);
+  $('insDays').value=0; delete $('insDays').dataset.touched;
+  $('accomNight').value=0; $('foodMeals').value=0; $('foodPerDay').value=0;
+  $('transPerDay').value=0; $('shopPerDay').value=0; $('shopBig').value=0;
+  $('nlNights').value=0; $('nlDrinks').value=0; $('nlCoverNights').value=0; $('nlMassages').value=0; $('nlExtras').value=0; $('nlMisc').value=0;
+  $('buffer').value=0; $('whatIf').value=0;
+  // clear all selections (no defaults) so nothing is pre-counted
+  sel = { area:null, tier:null, food:null, airport:null, daily:null, shop:null, scene:null, ins:0 };
+  document.querySelectorAll('.opt.sel').forEach(e=>{e.classList.remove('sel'); e.setAttribute('aria-pressed','false');});
+  document.querySelectorAll('.ins-toggle').forEach(x=>x.classList.remove('sel'));
+  $('insBox').style.display='none';
+  if($('seasonCard')) $('seasonCard').style.display='none';
+  cur=0; renderStep(); recalc();
+  const m=$('shareMsg'); if(m){ m.textContent='↺ Cleared — starting fresh at zero.'; setTimeout(()=>m.textContent='',2500); }
+}
+
+//=================== EXPORT / SHARE ===================
+function exportPDF(){
+  const {cats,totalTHB,c,r}=compute(num($('whatIf').value));
+  const name=$('nickname').value||'Traveler';
+  const {nights,days}=getNights();
+  let rows = Object.entries(cats).filter(([k,v])=>v>0).map(([k,v],i)=>
+    `<tr style="background:${i%2?'#F8F5EC':'#fff'}"><td style="padding:8px 10px;border-bottom:1px solid #e8e2d4">${k}</td><td style="text-align:right;padding:8px 10px;border-bottom:1px solid #e8e2d4;font-weight:600">${fmtCur(v,c,r)}</td><td style="text-align:right;padding:8px 10px;border-bottom:1px solid #e8e2d4;color:#888">${fmtTHB(v)}</td></tr>`).join('');
+  $('printArea').innerHTML = `
+    <div style="border-bottom:4px solid #0F766E;padding-bottom:14px;margin-bottom:16px">
+      <h1 style="color:#0F766E;margin:0;font-size:26px;font-family:Georgia,serif">Uncle Pong's Thailand Estimate 🌴</h1>
+      <p style="color:#555;margin:6px 0 0">For <b>${name}</b> · ${(DEST[$('dest').value]||{name:'Thailand'}).name} · ${$('travelers').value} traveler(s) · ${days} days / ${nights} nights · from ${$('startDate').value||'—'}</p>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <tr style="background:#0F766E;color:#fff"><th style="text-align:left;padding:8px 10px">Category</th><th style="text-align:right;padding:8px 10px">${c}</th><th style="text-align:right;padding:8px 10px">THB</th></tr>
+      ${rows}
+      <tr><td style="padding:12px 10px;font-weight:900;font-size:16px">GRAND TOTAL</td><td style="text-align:right;padding:12px 10px;font-weight:900;font-size:16px;color:#F97316">${fmtCur(totalTHB,c,r)}</td><td style="text-align:right;padding:12px 10px;font-weight:900">${fmtTHB(totalTHB)}</td></tr>
+    </table>
+    <p style="color:#999;font-size:11px;margin-top:18px">Estimate only, based on mid-2026 research. Prices vary by season, venue and booking. Travel insured and spend responsibly. · thaiholidaybudget.com</p>`;
+  window.print();
+}
+function shareBoys(){
+  const {totalTHB,c,r}=compute(num($('whatIf').value));
+  const name=$('nickname').value||'someone';
+  const destName = (DEST[$('dest').value]||{name:'Thailand'}).name;
+  const txt = `🌴 ${name}'s ${destName} budget: ${fmtCur(totalTHB,c,r)} (${fmtTHB(totalTHB)}) — estimated with Uncle Pong's Thailand Holiday Estimator. Lock in your number before you go, lads.`;
+  const done=()=>{ const m=$('shareMsg'); m.textContent='📋 Copied! Paste it to the group chat.'; setTimeout(()=>m.textContent='',3000); };
+  if(navigator.share){ navigator.share({title:'My Thailand budget',text:txt}).catch(()=>{ navigator.clipboard.writeText(txt).then(done); }); }
+  else { navigator.clipboard.writeText(txt).then(done).catch(()=>{$('shareMsg').textContent=txt;}); }
+}
+
+//=================== COOKIES / CONSENT ===================
+const PREF_KEY='somchai_cookie_prefs';
+function openCookieModal(){
+  let p={}; try{ p=JSON.parse(localStorage.getItem(PREF_KEY))||{}; }catch(e){}
+  if($('pref_analytics')) $('pref_analytics').checked=!!p.analytics;
+  if($('pref_ads')) $('pref_ads').checked=!!p.ads;
+  const m=$('cookieModal'); if(m){ m.classList.remove('hidden'); m.classList.add('flex'); }
+}
+function closeCookieModal(){ const m=$('cookieModal'); if(m){ m.classList.add('hidden'); m.classList.remove('flex'); } }
+function persistCookiePrefs(analytics, ads){
+  try{
+    localStorage.setItem(PREF_KEY, JSON.stringify({necessary:true, analytics:!!analytics, ads:!!ads, ts:Date.now()}));
+    localStorage.setItem('somchai_cookie_ok','1');
+  }catch(e){}
+  if($('cookieBanner')) $('cookieBanner').classList.add('hidden');
+  closeCookieModal();
+}
+function cookieSavePrefs(){ persistCookiePrefs($('pref_analytics') && $('pref_analytics').checked, $('pref_ads') && $('pref_ads').checked); }
+function cookieAcceptAll(){ persistCookiePrefs(true, true); }
+function cookieRejectAll(){ persistCookiePrefs(false, false); }
+// kept for backward compatibility
+function acceptCookies(){ cookieAcceptAll(); }
+
+//=================== THEME (dark default) ===================
+function applyThemeIcon(){
+  const dark = document.documentElement.classList.contains('dark');
+  ['themeBtn','themeBtnW'].forEach(id=>{ const b=document.getElementById(id); if(b) b.innerHTML = dark ? '☀️ Light' : '🌙 Dark'; });
+}
+function toggleTheme(){
+  const el = document.documentElement;
+  el.classList.toggle('dark');
+  try{ localStorage.setItem('pong_theme', el.classList.contains('dark') ? 'dark' : 'light'); }catch(e){}
+  applyThemeIcon();
+}
+
+//=================== INIT ===================
+document.addEventListener('input', e=>{ if(e.target.closest('main')) recalc(); });
+$('insDays').addEventListener('input',()=>{$('insDays').dataset.touched='1';});
+window.addEventListener('DOMContentLoaded',()=>{
+  loadProgress();
+  cur = 0;
+  markSel('areaGrid',sel.area); markSel('tierGrid',sel.tier); markSel('foodGrid',sel.food);
+  markSel('airportGrid',sel.airport); markSel('dailyTransGrid',sel.daily); markSel('shopGrid',sel.shop); markSel('sceneGrid',sel.scene);
+  document.querySelectorAll('.ins-toggle').forEach(x=>x.classList.toggle('sel', +x.dataset.ins===sel.ins));
+  $('insBox').style.display = sel.ins?'block':'none';
+  renderStep(); recalc();
+  let ok; try{ok=localStorage.getItem('somchai_cookie_ok');}catch(e){}
+  if(!ok) setTimeout(()=>$('cookieBanner').classList.remove('hidden'),900);
+});
+</script>
+</body>
+</html>

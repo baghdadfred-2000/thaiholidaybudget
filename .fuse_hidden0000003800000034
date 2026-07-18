@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style class="xad-off">.xadr,.ad-rail,.side-rail,.rail-ad,.wz-rail{display:none!important}</style>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta charset="UTF-8" />
+<script>/* theme bootstrap: dark is the default; light only if explicitly chosen */
+(function(){try{if(localStorage.getItem('pong_theme')!=='light')document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terms &amp; Disclaimer — Uncle Pong's Thailand Holiday Estimator | thaiholidaybudget.com</title>
+<meta name="description" content="Terms of use and disclaimer for thaiholidaybudget.com. The estimator provides rough planning estimates for entertainment and informational purposes only." />
+<link rel="canonical" href="https://thaiholidaybudget.com/terms.html" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0F766E" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Uncle Pong's Thailand Holiday Estimator" />
+<meta property="og:title" content="Terms &amp; Disclaimer — Uncle Pong's Thailand Holiday Estimator" />
+<meta property="og:url" content="https://thaiholidaybudget.com/terms.html" />
+<meta property="og:image" content="https://thaiholidaybudget.com/unclePong.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Terms of Use & Disclaimer","url":"https://thaiholidaybudget.com/terms.html","isPartOf":{"@type":"WebSite","name":"Uncle Pong's Thailand Holiday Estimator","url":"https://thaiholidaybudget.com/"},"publisher":{"@type":"Organization","name":"Genext Information Systems"},"inLanguage":"en"}
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        tealdeep: '#0F766E',
+        aqua:     '#14B8A6',
+        coral:    '#F97316',
+        ambery:   '#FBBF24',
+        sand:     '#F5F0E6',
+        cream:    '#FFFBF0',
+        ink:      'rgb(var(--ink-rgb) / <alpha-value>)',
+      },
+      fontFamily: {
+        sans: ['Inter','system-ui','Segoe UI','sans-serif'],
+        display: ['Fraunces','Georgia','serif'],
+      },
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+  /* ---------- theme tokens: light (default) vs dark (deep navy) ---------- */
+  :root{
+    color-scheme:light;
+    --page:#FFFBF0; --dot1:rgba(15,118,110,.045); --dot2:rgba(249,115,22,.03);
+    --ink-rgb:31 41 55;
+    --surface:#ffffff; --surface2:#ffffff;
+    --card-border:rgba(15,118,110,.10); --field-border:#E2DCCD;
+    --glass:rgba(255,251,240,.85); --glass-border:rgba(15,118,110,.12);
+    --accent:#0F766E;
+  }
+  html.dark{
+    color-scheme:dark;
+    --page:#0A1428; --dot1:rgba(20,184,166,.05); --dot2:rgba(249,115,22,.04);
+    --ink-rgb:230 237 248;
+    --surface:#0F1D36; --surface2:#0C182E;
+    --card-border:rgba(20,184,166,.20); --field-border:#243456;
+    --glass:rgba(8,16,32,.85); --glass-border:rgba(20,184,166,.18);
+    --accent:#2DD4BF;
+  }
+  html{-webkit-tap-highlight-color:transparent}
+  body{
+    background-color:var(--page);
+    background-image:radial-gradient(var(--dot1) 1px, transparent 1px),radial-gradient(var(--dot2) 1px, transparent 1px);
+    background-size:34px 34px,34px 34px; background-position:0 0,17px 17px;
+    color:rgb(var(--ink-rgb));
+    transition:background-color .25s, color .25s;
+  }
+  .glassbar{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--glass-border)}
+  .card{background:var(--surface);border:1px solid var(--card-border);border-radius:1.25rem;box-shadow:0 1px 2px rgba(15,118,110,.06),0 8px 24px -8px rgba(31,41,55,.10)}
+  html.dark .card{box-shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -8px rgba(0,0,0,.5)}
+  .btn-cta{background:linear-gradient(92deg,#F97316,#FB923C);color:#fff;font-weight:800;box-shadow:0 6px 20px -6px rgba(249,115,22,.55);transition:transform .15s,box-shadow .2s,filter .15s}
+  .btn-cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 12px 28px -8px rgba(249,115,22,.6)}
+  .btn-teal{background:linear-gradient(92deg,#0F766E,#14B8A6);color:#fff;font-weight:800;box-shadow:0 6px 20px -6px rgba(15,118,110,.5);transition:transform .15s,filter .15s}
+  .btn-teal:hover{transform:translateY(-2px);filter:brightness(1.06)}
+  .btn-ghost{background:var(--surface);border:1.5px solid var(--field-border);font-weight:700;transition:.15s;color:rgb(var(--ink-rgb))}
+  .btn-ghost:hover{border-color:#14B8A6;color:var(--accent)}
+  .prose h2{color:var(--accent);font-weight:800;font-size:1.2rem;margin:1.7rem 0 .5rem}
+  .prose h3{color:rgb(var(--ink-rgb));font-weight:700;font-size:1rem;margin:1rem 0 .3rem}
+  .prose p,.prose li{color:rgb(var(--ink-rgb) / .78);line-height:1.7;margin:.5rem 0}
+  .prose a{color:var(--accent);text-decoration:underline}
+  .prose ul{list-style:disc;padding-left:1.3rem}
+  html.dark .text-tealdeep{color:#2DD4BF}
+  /* ---------- important-notice callout ---------- */
+  .callout{border:1px solid rgba(249,115,22,.45);background:rgba(249,115,22,.08);border-radius:1rem;padding:1rem 1.1rem;margin:1.2rem 0}
+</style>
+</head>
+<body class="font-sans text-ink min-h-screen antialiased">
+<header class="sticky top-0 z-40 glassbar">
+  <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center gap-3 min-w-0">
+      <img src="unclePong.jpg" alt="Uncle Pong" class="w-10 h-10 rounded-full object-cover object-top ring-2 ring-aqua/60 shrink-0" width="784" height="1168" />
+      <span class="min-w-0 leading-tight">
+        <span class="block font-display font-black text-tealdeep text-lg truncate">Uncle Pong's</span>
+        <span class="block text-[10px] font-bold tracking-[.18em] uppercase text-coral">Thailand Holiday Estimator</span>
+      </span>
+    </a>
+    <div class="flex items-center gap-2">
+      <button id="themeBtn" onclick="toggleTheme()" class="btn-ghost text-xs px-3 py-2 rounded-xl" aria-label="Switch between dark and light theme">☀️ Light</button>
+      <a href="index.html" class="btn-teal text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-xl whitespace-nowrap">← Back to estimator</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 py-10">
+  <div class="card rounded-3xl p-6 sm:p-9 prose">
+    <p class="text-coral text-sm font-bold">Legal</p>
+    <h1 class="font-display text-3xl font-black mb-1">Terms of Use &amp; Disclaimer</h1>
+    <p class="text-ink/50 text-sm">Effective date: 21 June 2026 · Applies to thaiholidaybudget.com</p>
+
+    <p>These Terms of Use ("Terms") govern your access to and use of Uncle Pong's Thailand Holiday Estimator at thaiholidaybudget.com (the "Service"), operated by Genext Information Systems ("we", "us", "our"). By using the Service, you agree to these Terms. If you do not agree, please do not use the Service.</p>
+
+    <div class="callout">
+      <p style="margin:0"><strong class="text-coral">Important — estimates only.</strong> Every figure produced by the Service is a rough planning estimate based on general research compiled in mid-2026. Real prices vary by season, location, venue, exchange rate, demand, and how you travel. Nothing on this Service is a quotation, an offer, financial advice, or a guarantee of any price. Always confirm actual costs and current requirements before you commit money or travel.</p>
+    </div>
+
+    <h2>1. Purpose of the Service</h2>
+    <p>The Service is an informational and entertainment-oriented budgeting calculator for adults planning a trip to Thailand. It is designed to help you anticipate costs and avoid budget surprises. It does not recommend, arrange, facilitate, or broker any specific activity, vendor, booking, or transaction.</p>
+
+    <h2>2. Eligibility</h2>
+    <p>You must be at least 18 years old, or the age of majority where you live, to use the Service. By using it, you confirm that you meet this requirement.</p>
+
+    <h2>3. Not professional advice</h2>
+    <p>The Service does not provide financial, legal, medical, travel, visa, insurance, or tax advice. Exchange rates, entry requirements (including the Thailand Digital Arrival Card and proof-of-funds rules), insurance norms, and local prices change frequently and without notice. You are responsible for verifying anything important with official and licensed sources. For example, submit your Thailand Digital Arrival Card only through the official government portal at tdac.immigration.go.th, which is free of charge.</p>
+
+    <h2>4. Responsible and lawful conduct</h2>
+    <p>You are solely responsible for your own decisions and conduct while travelling. You agree to comply with the laws of Thailand and any other applicable jurisdiction, to respect the rights, dignity, and consent of everyone you interact with, and to act responsibly with respect to alcohol and personal safety. The Service does not endorse or encourage any unlawful activity.</p>
+
+    <h2>5. Accuracy and availability</h2>
+    <p>We make reasonable efforts to keep the underlying research current but make no warranty that any figure is accurate, complete, or up to date. The Service is provided on an "as is" and "as available" basis, without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We may modify, suspend, or discontinue the Service at any time without notice.</p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, Genext Information Systems and its operators shall not be liable for any direct, indirect, incidental, consequential, or special loss or damage arising out of or in connection with your use of, or reliance on, the Service or its estimates — including, without limitation, budget overruns, missed savings, travel disruptions, or decisions made based on the output. You use the Service entirely at your own risk.</p>
+
+    <h2>7. Intellectual property</h2>
+    <p>"Uncle Pong" is a fictional, light-hearted persona created for the Service. The design, text, and original content of the Service are owned by Genext Information Systems and are provided for your personal, non-commercial use. You may not copy, redistribute, or create derivative works from the Service without permission. Third-party libraries (such as Tailwind CSS and Chart.js) and fonts remain the property of their respective owners under their own licences.</p>
+
+    <h2>8. Third-party links and services</h2>
+    <p>The Service may reference or link to third-party websites and services for your convenience. We do not control and are not responsible for the content, policies, or practices of any third party.</p>
+
+    <h2>9. No affiliation</h2>
+    <p>The Service is independent and is not affiliated with, endorsed by, or sponsored by the Tourism Authority of Thailand, the Thai Ministry of Tourism and Sports, any government body, airline, hotel, or venue.</p>
+
+    <h2>10. Changes to these Terms</h2>
+    <p>We may update these Terms from time to time. Continued use of the Service after an update constitutes acceptance of the revised Terms. The effective date above reflects the current version.</p>
+
+    <h2>11. Governing approach and severability</h2>
+    <p>These Terms are intended to be interpreted reasonably and in good faith. If any provision is found to be unenforceable, the remaining provisions will continue in full force and effect.</p>
+
+    <h2>12. Contact</h2>
+    <p>Questions about these Terms can be sent to <a href="mailto:support@thaiholidaybudget.com">support@thaiholidaybudget.com</a>.</p>
+  </div>
+
+
+</main>
+
+  <!-- ==================== SIDE RAILS + LEADERBOARD (in side gutters, just above footer; scroll with page, not fixed) ==================== -->
+  <style>
+    .rail-anchor{ position:relative; }
+    .rail-ad{ display:none; }
+    @media (min-width:1120px){
+      .rail-ad{ display:block; position:absolute; bottom:0; width:160px; height:300px; z-index:20; }
+      .rail-ad.rail-left{  right:calc(50% + 392px); }
+      .rail-ad.rail-right{ left:calc(50% + 392px); }
+    }
+  </style>
+  <div class="rail-anchor no-print">
+    
+    
+
+    <!-- Center leaderboard 728x90 -->
+    <section class="no-print w-full" aria-label="Advertisement">
+      <div class="max-w-6xl mx-auto px-4 py-8">
+        <p class="text-center text-[10px] uppercase tracking-[0.2em] text-ink/30 mb-3">Advertisement</p>
+        <div class="flex justify-center overflow-x-auto">
+          <div class="shrink-0" style="width:728px;height:90px">
+            <script type="text/javascript">
+              atOptions = { 'key' : '6bf56727ac0e1458327e400fcbe88d85', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/6bf56727ac0e1458327e400fcbe88d85/invoke.js"></script>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<!-- FOOTER -->
+<footer class="no-print relative mt-16" style="background:#0F3D39" data-xadr-footer><div class="xadr xadr-l" aria-label="Advertisement"><iframe title="Advertisement" width="160" height="300" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:0;display:block;overflow:hidden" srcdoc='<body style="margin:0;overflow:hidden"><script type="text/javascript">atOptions = {"key":"2b98a36398b21cc769231ed802fdcd1e","format":"iframe","height":300,"width":160,"params":{}};</script><script type="text/javascript" src="https://www.highperformanceformat.com/2b98a36398b21cc769231ed802fdcd1e/invoke.js"></script><style class="xadr-fix">.xadr{position:absolute!important;top:auto!important;bottom:calc(100% + 100px)!important;width:160px!important;z-index:40;line-height:0}.xadr iframe{border:0;display:block;overflow:hidden}.xadr-l{left:calc(50% - 740px)!important;right:auto!important}.xadr-r{right:calc(50% - 740px)!important;left:auto!important}@media(max-width:1500px){.xadr{display:none!important}}[data-xadr-footer]{position:relative}</style>
+</body>'></iframe></div><div class="xadr xadr-r" aria-label="Advertisement"><iframe title="Advertisement" width="160" height="300" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:0;display:block;overflow:hidden" srcdoc='<body style="margin:0;overflow:hidden"><script type="text/javascript">atOptions = {"key":"2b98a36398b21cc769231ed802fdcd1e","format":"iframe","height":300,"width":160,"params":{}};</script><script type="text/javascript" src="https://www.highperformanceformat.com/2b98a36398b21cc769231ed802fdcd1e/invoke.js"></script></body>'></iframe></div>
+  <div class="max-w-6xl mx-auto px-4 py-12 text-center">
+    <!-- USER IMAGE: unclePong.jpg - warm sign-off avatar in the footer -->
+    <img src="unclePong.jpg" alt="" loading="lazy" decoding="async" class="w-16 h-16 rounded-full object-cover object-top mx-auto ring-2 ring-ambery/70 mb-4" width="784" height="1168" />
+    <p class="text-cream/90 font-display font-bold text-xl mb-2">"Plan the baht, then enjoy every one of them."</p>
+    <p class="text-cream/60 text-sm max-w-2xl mx-auto mb-8">Estimates are planning ballparks based on mid-2026 research, not guaranteed prices. Spend responsibly, drink water, know your limits, respect local laws and the people you meet. Travel insured. Have a great trip. — Uncle Pong 🌴</p>
+    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-cream/70" aria-label="Footer">
+      <a href="/about" class="hover:text-ambery transition">About</a>
+      <a href="/contact" class="hover:text-ambery transition">Contact</a>
+      <a href="phrases.html" class="hover:text-ambery transition">Thai Phrases</a>
+      <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
+      <a href="/cookies" class="hover:text-ambery transition">Cookie Policy</a>
+      <a href="/cookie-settings" class="hover:text-ambery transition">Cookie Settings</a>
+      <a href="terms.html" class="hover:text-ambery transition">Terms &amp; Disclaimer</a>
+      <a href="accessibility.html" class="hover:text-ambery transition">Accessibility</a>
+    </nav>
+    <p class="mt-6 text-xs text-cream/40">© 2026 Genext Information Systems. All rights reserved. · <a href="https://thaiholidaybudget.com" class="hover:text-ambery">thaiholidaybudget.com</a> · V2.0</p>
+    <p class="mt-1 text-xs text-cream/40">For entertainment purposes only. Not affiliated with the Thai Ministry of Tourism — please do your own research. 🌴</p>
+  </div>
+</footer>
+
+
+<script>
+  function applyThemeIcon(){var b=document.getElementById('themeBtn');if(b)b.innerHTML=document.documentElement.classList.contains('dark')?'☀️ Light':'🌙 Dark';}
+  function toggleTheme(){var el=document.documentElement;el.classList.toggle('dark');try{localStorage.setItem('pong_theme',el.classList.contains('dark')?'dark':'light');}catch(e){}applyThemeIcon();}
+  applyThemeIcon();
+</script>
+</body>
+</html>
