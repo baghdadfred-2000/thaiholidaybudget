@@ -6,10 +6,6 @@
      <script src="/assets/site.js" defer></script>   (before </body>)
    ========================================================= */
 
-/* One footer ad slot (160x300, highperformanceformat). */
-var THB_AD =
-  '<iframe title="Advertisement" width="160" height="300" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:0;display:block;overflow:hidden" srcdoc=\'<body style="margin:0;overflow:hidden"><script type="text/javascript">atOptions = {"key":"2b98a36398b21cc769231ed802fdcd1e","format":"iframe","height":300,"width":160,"params":{}};</script><script type="text/javascript" src="https://www.highperformanceformat.com/2b98a36398b21cc769231ed802fdcd1e/invoke.js"></script></body>\'></iframe>';
-
 /* MailerLite subscribe block (same form/list as the other sites, tagged
    Company=ThaiHolidayBudget). */
 function subscribeHTML() {
@@ -45,17 +41,20 @@ function subscribeHTML() {
 function footerHTML() {
   var showSignup = !(document.body && document.body.hasAttribute('data-no-signup'));
   return `
-  <footer class="no-print relative mt-16" style="background:#0F3D39" data-xadr-footer><div class="xadr xadr-l" aria-label="Advertisement">${THB_AD}</div><div class="xadr xadr-r" aria-label="Advertisement">${THB_AD}</div>
+  <footer class="no-print relative mt-16" style="background:#0F3D39">
     <div class="max-w-6xl mx-auto px-4 pt-6 pb-32">
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 text-cream/80">
         <div>
           <div class="flex items-center gap-3 mb-1">
-            <img src="/unclePong.jpg" alt="" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover object-top ring-2 ring-ambery/70 shrink-0" width="784" height="1168">
-            <span class="font-display font-black text-cream text-lg leading-tight">Thailand Holiday Estimator</span>
+            <img src="/unclePong.jpg" alt="Uncle Pong" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover object-top ring-2 ring-aqua/60 shadow-card shrink-0" width="784" height="1168">
+            <span class="min-w-0 leading-tight">
+              <span class="block font-display font-black text-tealdeep text-lg truncate">Uncle Pong's</span>
+              <span class="block text-[10px] font-bold tracking-[.18em] uppercase text-coral">Thailand Holiday Estimator</span>
+            </span>
           </div>
           ${showSignup ? subscribeHTML() : ''}
         </div>
-        <div class="sm:pl-5">
+        <div class="sm:pl-[100px]">
           <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wider">Explore</h3>
           <ul class="space-y-2 text-sm">
             <li><a href="/about" class="hover:text-ambery transition">About ThaiHoliday Budget</a></li>
@@ -82,10 +81,10 @@ function footerHTML() {
         <nav class="flex flex-wrap justify-center gap-4" aria-label="Legal">
           <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
           <a href="/terms" class="hover:text-ambery transition">Terms</a>
-          <a href="/terms" class="hover:text-ambery transition">Disclaimer</a>
+          <a href="/terms#disclaimer" class="hover:text-ambery transition">Disclaimer</a>
           <a href="/cookies" class="hover:text-ambery transition">Cookie</a>
           <a href="/accessibility" class="hover:text-ambery transition">Accessibility</a>
-          <a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a>
+          <a href="/cookie-settings" class="hover:text-ambery transition">Cookie Settings</a>
         </nav>
       </div>
     </div>

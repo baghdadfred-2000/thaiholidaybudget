@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style class="xad-off">.xadr,.ad-rail,.side-rail,.rail-ad,.wz-rail{display:none!important}</style>
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta charset="UTF-8" />
 <script>/* theme bootstrap: dark is the default; light only if explicitly chosen */
@@ -9,7 +8,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cookie Settings — Uncle Pong's Thailand Holiday Estimator | thaiholidaybudget.com</title>
-<meta name="description" content="Review and manage what thaiholidaybudget.com stores on your device. Clear your saved estimate and notice preferences here." />
+<meta name="description" content="Review and manage what thaiholidaybudget.com stores on your device. Set your cookie and ad-personalisation choices for Google AdSense, and clear anything you like, at any time." />
 <link rel="canonical" href="https://thaiholidaybudget.com/cookie-settings" />
 <meta name="robots" content="noindex, follow" />
 <meta name="theme-color" content="#0F766E" />
@@ -112,7 +111,7 @@ tailwind.config = {
   <div class="card rounded-3xl p-6 sm:p-9">
     <p class="text-coral text-sm font-bold">Privacy controls</p>
     <h1 class="font-display text-3xl font-black mb-2">Cookie Settings</h1>
-    <p class="text-ink/70 mb-6">thaiholidaybudget.com uses only <strong>strictly-necessary local storage</strong> to make the estimator work — there are no advertising, analytics, or tracking cookies to manage. Below is exactly what is stored on your device, and you can clear it at any time.</p>
+    <p class="text-ink/70 mb-6">thaiholidaybudget.com uses <strong>strictly-necessary on-device storage</strong> to work, and — with your consent — Google AdSense may set advertising cookies. Set your preferences and clear anything you like, at any time. Below is exactly what is stored on your device.</p>
 
     <!-- categories -->
     <div class="space-y-4">
@@ -135,7 +134,7 @@ tailwind.config = {
       <label class="tile p-4 flex items-start justify-between gap-4 cursor-pointer hover:border-aqua/60 transition">
         <div>
           <p class="font-bold">Advertising / marketing</p>
-          <p class="text-sm text-ink/60 mt-1">Lets Adsterra personalise the ads you see. Turn off for non-personalised ads.</p>
+          <p class="text-sm text-ink/60 mt-1">Records your preference for personalised ads via Google AdSense. Turn off to prefer non-personalised ads.</p>
         </div>
         <input type="checkbox" id="pref_ads" class="w-5 h-5 mt-1 shrink-0">
       </label>
@@ -147,6 +146,8 @@ tailwind.config = {
       <button onclick="prefAccept()" class="btn-cta px-3 py-2.5 rounded-xl text-sm">Accept all</button>
     </div>
     <p id="prefMsg" class="text-center text-sm text-tealdeep font-semibold mt-3 h-5"></p>
+
+    <p class="text-xs text-ink/50 mt-2 leading-relaxed">If you are in the EEA or UK, Google's certified consent tool manages whether personalised ads are actually shown. <button type="button" id="btnGoogleChoices" class="link font-medium">Reopen Google ad choices</button>.</p>
 
     <!-- current storage -->
     <h2 class="text-lg font-bold mt-8 mb-2 text-tealdeep">What's stored right now</h2>
@@ -179,19 +180,6 @@ tailwind.config = {
     
 
     <!-- Center leaderboard 728x90 -->
-    <section class="no-print w-full" aria-label="Advertisement">
-      <div class="max-w-6xl mx-auto px-4 py-8">
-        <p class="text-center text-[10px] uppercase tracking-[0.2em] text-ink/30 mb-3">Advertisement</p>
-        <div class="flex justify-center overflow-x-auto">
-          <div class="shrink-0" style="width:728px;height:90px">
-            <script type="text/javascript">
-              atOptions = { 'key' : '6bf56727ac0e1458327e400fcbe88d85', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-            </script>
-            <script type="text/javascript" src="https://www.highperformanceformat.com/6bf56727ac0e1458327e400fcbe88d85/invoke.js"></script>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 
 <!-- FOOTER -->
@@ -231,6 +219,12 @@ tailwind.config = {
   function prefSave(){ savePrefs(document.getElementById('pref_analytics').checked, document.getElementById('pref_ads').checked); }
   function prefAccept(){ savePrefs(true, true); }
   function prefReject(){ savePrefs(false, false); }
+
+  var gc=document.getElementById('btnGoogleChoices');
+  if(gc) gc.onclick=function(){
+    try{ if(window.googlefc && typeof window.googlefc.showRevocationMessage==='function'){ window.googlefc.showRevocationMessage(); return; } }catch(e){}
+    alert('Google’s ad-consent prompt is only shown to visitors in the EEA or UK, where it is required. It is not available in your region.');
+  };
 
   loadPrefs(); render();
 </script>
