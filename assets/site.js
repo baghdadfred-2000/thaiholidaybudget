@@ -1,6 +1,6 @@
 /* =========================================================
    ThaiHolidayBudget — SHARED SITE JS
-   Injects the standardized 4-column footer (with MailerLite subscribe
+   Injects the standardized 3-column footer (with MailerLite subscribe
    form) on every page. In place of the old inline <footer>, each page has:
      <div id="site-footer"></div>
      <script src="/assets/site.js" defer></script>   (before </body>)
@@ -47,7 +47,18 @@ function footerHTML() {
   return `
   <footer class="no-print relative mt-16" style="background:#0F3D39" data-xadr-footer><div class="xadr xadr-l" aria-label="Advertisement">${THB_AD}</div><div class="xadr xadr-r" aria-label="Advertisement">${THB_AD}</div>
     <div class="max-w-6xl mx-auto px-4 py-12">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-cream/80">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-10 text-xs text-cream/50">
+        <p>© 2026 Genext Information Systems. All rights reserved.</p>
+        <nav class="flex flex-wrap justify-center gap-4" aria-label="Legal">
+          <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
+          <a href="/terms" class="hover:text-ambery transition">Terms</a>
+          <a href="/terms" class="hover:text-ambery transition">Disclaimer</a>
+          <a href="/cookies" class="hover:text-ambery transition">Cookie</a>
+          <a href="/accessibility" class="hover:text-ambery transition">Accessibility</a>
+          <a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a>
+        </nav>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 text-cream/80">
         <div>
           <div class="flex items-center gap-3 mb-1">
             <img src="/unclePong.jpg" alt="" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover object-top ring-2 ring-ambery/70 shrink-0" width="784" height="1168">
@@ -56,33 +67,27 @@ function footerHTML() {
           ${showSignup ? subscribeHTML() : ''}
         </div>
         <div>
-          <h3 class="text-cream font-semibold mb-3">Explore</h3>
+          <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wider">Explore</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="/" class="hover:text-ambery transition">Plan your Trip</a></li>
+            <li><a href="/about" class="hover:text-ambery transition">About ThaiHoliday Budget</a></li>
+            <li><a href="/" class="hover:text-ambery transition">Build my Budget</a></li>
             <li><a href="/#smarter" class="hover:text-ambery transition">Travel Smarter</a></li>
-            <li><a href="/#how" class="hover:text-ambery transition">How it works</a></li>
+            <li><a href="/#how" class="hover:text-ambery transition">How it Works</a></li>
             <li><a href="/phrases" class="hover:text-ambery transition">Thai Phrases</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-cream font-semibold mb-3">Company</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/about" class="hover:text-ambery transition">About</a></li>
             <li><a href="/contact" class="hover:text-ambery transition">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h3 class="text-cream font-semibold mb-3">Legal</h3>
+          <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wider">Network Sites</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="/privacy" class="hover:text-ambery transition">Privacy Policy</a></li>
-            <li><a href="/cookies" class="hover:text-ambery transition">Cookie Policy</a></li>
-            <li><a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a></li>
-            <li><a href="/terms" class="hover:text-ambery transition">Terms &amp; Disclaimer</a></li>
-            <li><a href="/accessibility" class="hover:text-ambery transition">Accessibility</a></li>
+            <li><a href="https://thaithuk.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiThuk</a></li>
+            <li><a href="https://thaivisafinder.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiVisaFinder</a></li>
+            <li><a href="https://thailetters.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiLetters</a></li>
+            <li><a href="https://thailotterynumbers.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiLotteryNumbers</a></li>
+            <li><a href="https://thaitripplanner.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiTripPlanner</a></li>
           </ul>
         </div>
       </div>
-      <p class="mt-10 pt-6 border-t border-white/10 text-center text-xs text-cream/40">© 2026 Genext Information Systems. All rights reserved.</p>
     </div>
   </footer>`;
 }
