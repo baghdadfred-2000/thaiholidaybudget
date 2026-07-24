@@ -55,7 +55,7 @@ function footerHTML() {
           </div>
           ${showSignup ? subscribeHTML() : ''}
         </div>
-        <div>
+        <div class="sm:pl-5">
           <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wider">Explore</h3>
           <ul class="space-y-2 text-sm">
             <li><a href="/about" class="hover:text-ambery transition">About ThaiHoliday Budget</a></li>
@@ -77,7 +77,7 @@ function footerHTML() {
           </ul>
         </div>
       </div>
-      <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
         <p>© 2026 Genext Information Systems. All rights reserved.</p>
         <nav class="flex flex-wrap justify-center gap-4" aria-label="Legal">
           <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
