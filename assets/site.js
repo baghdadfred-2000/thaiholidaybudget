@@ -46,18 +46,7 @@ function footerHTML() {
   var showSignup = !(document.body && document.body.hasAttribute('data-no-signup'));
   return `
   <footer class="no-print relative mt-16" style="background:#0F3D39" data-xadr-footer><div class="xadr xadr-l" aria-label="Advertisement">${THB_AD}</div><div class="xadr xadr-r" aria-label="Advertisement">${THB_AD}</div>
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-10 text-xs text-cream/50">
-        <p>© 2026 Genext Information Systems. All rights reserved.</p>
-        <nav class="flex flex-wrap justify-center gap-4" aria-label="Legal">
-          <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
-          <a href="/terms" class="hover:text-ambery transition">Terms</a>
-          <a href="/terms" class="hover:text-ambery transition">Disclaimer</a>
-          <a href="/cookies" class="hover:text-ambery transition">Cookie</a>
-          <a href="/accessibility" class="hover:text-ambery transition">Accessibility</a>
-          <a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a>
-        </nav>
-      </div>
+    <div class="max-w-6xl mx-auto px-4 pt-6 pb-32">
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 text-cream/80">
         <div>
           <div class="flex items-center gap-3 mb-1">
@@ -87,6 +76,17 @@ function footerHTML() {
             <li><a href="https://thaitripplanner.com" target="_blank" rel="noopener" class="hover:text-ambery transition">ThaiTripPlanner</a></li>
           </ul>
         </div>
+      </div>
+      <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/50">
+        <p>© 2026 Genext Information Systems. All rights reserved.</p>
+        <nav class="flex flex-wrap justify-center gap-4" aria-label="Legal">
+          <a href="/privacy" class="hover:text-ambery transition">Privacy</a>
+          <a href="/terms" class="hover:text-ambery transition">Terms</a>
+          <a href="/terms" class="hover:text-ambery transition">Disclaimer</a>
+          <a href="/cookies" class="hover:text-ambery transition">Cookie</a>
+          <a href="/accessibility" class="hover:text-ambery transition">Accessibility</a>
+          <a href="/cookie-settings" onclick="event.preventDefault();openCookieModal();" class="hover:text-ambery transition">Cookie Settings</a>
+        </nav>
       </div>
     </div>
   </footer>`;
